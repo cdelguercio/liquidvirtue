@@ -5,6 +5,7 @@ from django.conf import settings
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'liquidvirtue.views.index', name='index'),
     #
     (r'^facebook/', include('django_facebook.urls')),
     
