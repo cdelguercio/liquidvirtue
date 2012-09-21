@@ -19,7 +19,7 @@ def create_profile(sender, instance, created, **kwargs):
     if created: 
         profile, new = UserProfile.objects.get_or_create(user=instance)
 
-        class Channel(models.Model):
+class Channel(models.Model):
 	channel_name = models.CharField(max_length=500)
 	newest_video_name = models.CharField(max_length=1000)
 
