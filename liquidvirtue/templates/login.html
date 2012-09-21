@@ -8,5 +8,5 @@
 {% endif %}
 
 {% if request.user.is_authenticated %}
-<h1>Welcome {{ request.user }}</h1>
+Hello {{ request.user.first_name }}
 {% endif %}
