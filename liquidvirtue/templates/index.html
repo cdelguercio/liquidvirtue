@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>L+V Newest Tracks</title>
+<link href="Liquid.css" rel="stylesheet" type="text/css" />
+{% load staticfiles %}
+<link href="{% static "css/facebook.css" %}" type="text/css" rel="stylesheet" media="all" />
+<link rel="shortcut icon" href="favicon.gif" />
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		// This is more like it!
+	});
+</script>
+<script type="text/javascript" src="/static/javascript/lv_youtube.js"></script>
+<script type="text/javascript" src="/static/javascript/lv_updatepage.js"></script>
+</head>
+
+<body>
+	{% include 'preload_header.html' %}
+	<div class="liquidvirtue">
+	<!-- ENTER THE LIQUID -->
+
+	<!-- LEFT -->
+	<div class="left">
+		<div class="logo"></div>
+		<div id="video" class="video"></div>
+		<div id="trackinfo" class="trackinfo">
+				<button id="progress" class="progressBar">
+					<div id="elapsed" class="elapsed"></div>
+				</button>
+				<div id="viewpost" class="viewpost"><p>View post on youtube</p></div>
+                <div class="btnspace"></div>
+                <div id="sharesong" class="sharesong"><p>Share this track on facebook</p></div>
+                <div class="btnspace"></div>
+                <div id="like_big" class="plus"><p>Add this track to your playlist</p></div>
+            </div>
+        </div>
+        
+        <!-- RIGHT -->
+        <div class="right">
+        	<div class="navbox"><ul>
+            	<li><a onClick="updatePage( 1, 'newest' );document.title='L+V Newest Tracks'">Newest Tracks</a></li>
+                <li><a onClick="updatePage( 1, 'popular' );document.title='L+V Popular Tracks'">Popular Tracks</a></li>
+                <li><a onClick="updatePage( 1, 'mylibrary' );document.title='L+V My Library'">My Library</a></li>
+            </ul>
+            <p>{% include 'login.html' %}</p>
+            </div>
+            <div id="arrow" class="newest"></div>
+        	<div id="pagebox_upper" class="pagebox">
+          	</div>
+			
+			<div class="searchbox">
+                    <button id="searchbutton" class="search" onclick="updatePage( 1, 'search' )">Search</button>
+                    <input id="searchbar" class="searchbar" value="" onkeypress="submitSearch( event )"/>
+            </div>
+            
+            <div id="searchresults" class="searchresults"><h1>Search results for: <b id="searchedterm"></b></h1></div>
+			
+            <div class="trackbox" id="trackbox">
+            </div>
+            
+            <div id="pagebox_lower" class="pagebox">
+          	</div>
+        </div>
+        
+        {% include 'footer.html' %}
+        
+    <!-- EXIT LIQUID -->
+    </div>
+	<!--<div id="fb-root"></div>
+	<script>               
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId: '<?php echo $facebook->getAppID() ?>', 
+				cookie: true, 
+				xfbml: true,
+				oauth: true
+			});
+			FB.Event.subscribe('auth.login', function(response) {
+				window.location.reload();
+			});
+			FB.Event.subscribe('auth.logout', function(response) {
+				window.location.reload();
+			});
+		};
+		(function() {
+			var e = document.createElement('script'); e.async = true;
+			e.src = document.location.protocol +
+				'//connect.facebook.net/en_US/all.js';
+			document.getElementById('fb-root').appendChild(e);
+		}());
+	</script>-->
+	{% include 'django_facebook/_facebook_js.html' %}
+	{% include 'preload_footer.html' %}
+</body>
+</html>

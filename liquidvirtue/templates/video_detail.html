@@ -1,0 +1,10 @@
+<div class="post">
+
+<h1 onClick="change_video( '{{video.url}}', '{{video.watch_page_url}}', '{{video.youtube_video_id}}', {{video.title}}, '{{video.channel}}', '{{upload_date_text}}', '{{page_type}}', '{{video.lv_video_id}}', this.parentNode.className );this.parentNode.className='nowplaying'">{{video.title}}</h1>
+<p>{{channel_type}}</p>
+
+	<div class="playbar">
+		<button class="play" onClick="change_video( '{{video.url}}', '{{video.watch_page_url}}', '{{video.youtube_video_id}}', {{video.title}}, '{{video.channel}}', '{{upload_date_text}}', '{{page_type}}', '{{video.lv_video_id}}', this.parentNode.parentNode.className );this.parentNode.parentNode.className='nowplaying'"></button>
+		<div class="{{class_name}}" onClick="hit_like( '{{video.title}}', this.id )"></div><h1>{{video.num_likes}}</h1>
+	</div>
+</div>

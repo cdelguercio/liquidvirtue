@@ -1,0 +1,164 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {font-family:hbc;src:url(../fonts/hbc.otf);}
+@font-face {font-family:hlc;src:url(../fonts/hlc.otf);}
+@font-face {font-family:uuc;src:url(../fonts/uuc.otf);}
+
+body {
+	background-color:#fff;
+	font-family:Helvetica, Arial, Verdana, sans-serif;
+}
+.wrapper {
+	width:500px;
+	height:674px;
+	background-color:#fff;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+.header {
+	width:500px;
+	height:56px;
+	background-image:url(../images/fb/header.gif);
+	background-position:top left;
+	background-repeat:no-repeat;
+	margin:0px;
+	float:left;
+}
+.content {
+	width:500px;
+	height:500px;
+	background-color:#000;
+	float:left;
+	margin:0px;
+}
+.songtitle {
+	width:460px;
+	min-height:20px;
+	margin:20px 20px 0px 20px;
+	float:left;
+	background-color:#000;
+	color:#fff;
+	font-family:hbc, Helvetica, Arial, Verdana, sans-serif;
+	-webkit-transition:color 0.4s ease;
+	-moz-transition:color 0.4s ease;
+	-o-transition:color 0.4s ease;
+	transition:color 0.4s ease;
+}
+.songtitle:hover {color:#02c8bc;cursor:pointer;}
+.moreinfo {
+	width:460px;
+	height:30px;
+	float:left;
+	margin:10px 20px 0px 20px;
+	padding:10px 0px 0px 0px;
+	border-top:1px solid #333;
+}
+.moreinfo h1 {
+	font-size:12px;
+	color:#ccc;
+	margin:0px;
+	font-weight:normal;
+	padding:0px;
+}
+.moreinfo h1 a:link {font-weight:bold;color:#ccc;text-decoration:none;}
+.moreinfo h1 a:active {font-weight:bold;color:#ccc;text-decoration:none;}
+.moreinfo h1 a:visited {font-weight:bold;color:#ccc;text-decoration:none;}
+.moreinfo h1 a:hover {font-weight:bold;color:#ccc;text-decoration:underline;}
+
+.video {
+	width:460px;
+	min-height:307px;
+	background-color:#fff;
+	float:left;
+	margin:0px 20px 20px 20px;
+}
+.timer {
+	width:460px;
+	height:30px;
+	float:left;
+	background-color:#333;
+	margin:0px 20px 0px 20px;
+}
+.timer .play {
+	width:30px;
+	height:30px;
+	float:left;
+	margin:0px;
+	background-color:#fff;
+	-webkit-transition:background-color 0.4s ease;
+	-moz-transition:background-color 0.4s ease;
+	-o-transition:background-color 0.4s ease;
+	transition:background-color 0.4s ease;
+	background-position:top left;
+	background-repeat:no-repeat;
+	background-image:url(../images/fb/play.png);
+	border:0px;
+}
+.timer .play:hover {cursor:pointer;background-color:#02c8bc;}
+.timer .pause {
+	width:30px;
+	height:30px;
+	float:left;
+	margin:0px;
+	background-color:#fff;
+	-webkit-transition:background-color 0.4s ease;
+	-moz-transition:background-color 0.4s ease;
+	-o-transition:background-color 0.4s ease;
+	transition:background-color 0.4s ease;
+	background-position:top left;
+	background-repeat:no-repeat;
+	background-image:url(../images/fb/pause.png);
+	border:0px;
+}
+.timer .pause:hover {cursor:pointer;background-color:#02c8bc;}
+.timer .progressBar {
+	width:425px;
+	float:left;
+	margin:0px;
+	background-color:#333;
+	padding:0px 5px 0px 0px;
+	z-index:98;
+	border:0px;
+}
+.timer .progressBar .elapsed {
+	height:20px;
+	float:left;
+	margin:5px 0px 0px 0px;
+	z-index:99;
+	background-color:#000;
+	background-image:url(../images/fb/scale.gif);
+	background-position:top left;
+	background-repeat:repeat-y;
+	border:0px;
+	padding:0px;
+}
+.gotosite {
+	width:500px;
+	height:64px;
+	background-color:#333;
+	float:left;
+	margin:0px;
+	text-align:left;
+	-webkit-transition:background-color 0.4s ease;
+	-moz-transition:background-color 0.4s ease;
+	-o-transition:background-color 0.4s ease;
+	transition:background-color 0.4s ease;
+}
+.gotosite:hover {cursor:pointer;background-color:#02c8bc;}
+.gotosite h1 {
+	float:left;
+	margin:18px 0px 0px 0px;
+	color:#fff;
+	font-family:hbc, Helvetica, Arial, Verdana, sans-serif;
+	font-size:24px;
+	text-transform:uppercase;
+}
+.gotosite .arrow {
+	height:18px;
+	width:10px;
+	background-image:url(../images/fb/arrow.png);
+	float:left;
+	margin:23px 20px 0px 0px;
+}

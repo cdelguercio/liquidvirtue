@@ -1,0 +1,12 @@
+{% if not request.user.is_authenticated %}
+
+<form action="{% url facebook_connect %}?facebook_login=1" method="post">
+<a href="javascript:void(0);" style="font-size: 20px;" onclick="F.connect(this.parentNode);">Register, login or connect with facebook</a>
+<input type="hidden" value="{{ request.path }}" name="next" />
+</form>
+
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<h1>Welcome {{ request.user }}</h1>
+{% endif %}
