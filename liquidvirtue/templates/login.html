@@ -8,5 +8,5 @@
 {% endif %}
 
 {% if request.user.is_authenticated %}
-Hello {{ request.user.first_name }}
+Hello {{ request.user.first_name }}&nbsp;&nbsp;&nbsp;<a href="/accounts/logout/?next=/">Logout</a>
 {% endif %}
