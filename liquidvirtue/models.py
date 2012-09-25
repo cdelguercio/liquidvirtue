@@ -42,7 +42,8 @@ class Video(models.Model):
 	youtube_video_id = models.CharField(max_length=1000)
 	url = models.CharField(max_length=1000)
 	watch_page_url = models.CharField(max_length=1000)
-	upload_date = models.BigIntegerField()
+	upload_date = models.DateTimeField()
+	upload_time = models.BigIntegerField()
 	featured = models.BooleanField()
 
 	def __unicode__(self):
