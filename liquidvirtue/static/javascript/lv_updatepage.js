@@ -4,7 +4,7 @@ var pageType = 'newest'; //where the user is
 var timeFrame = 'alltime';
 var search = '';
 
-function updatePage( pageNumber, _pageType )
+function updatePage( _pageNumber, _pageType )
 {
 	if( _pageType == 0 )
 	{
@@ -34,12 +34,13 @@ function updatePage( pageNumber, _pageType )
 		httpPagebox = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 
-	var url = 'ajax/pagebox_response.php';
-	var params =	'pageNumber=' + escape(pageNumber) +
+	var url = '/' + _pageType + '/' + _pageNumber + '/';
+	/*var params =	'pageNumber=' + escape(_pageNumber) +
 					'&pageType=' + escape(_pageType) +
 					'&user=' + escape(facebook_id) +
 					'&timeFrame=' + escape(timeFrame) +
-					'&search=' + escape(search);
+					'&search=' + escape(search);*/
+	var params = '';
 	httpPagebox.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
@@ -73,14 +74,15 @@ function updatePage( pageNumber, _pageType )
 		httpTrackbox = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 
-	var url = 'ajax/trackbox_response.php';
-	var params =	'pageNumber=' + escape(pageNumber) +
+	var url = '/trackbox_response.php';
+	/*var params =	'pageNumber=' + escape(_pageNumber) +
 					'&user=' + escape(facebook_id) +
 					'&pageType=' + escape(_pageType) +
 					'&lvVideoId=' + escape(currentVideoId) +
 					'&currentSection=' + escape(currentSection) +
 					'&timeFrame=' + escape(timeFrame) +
-					'&search=' + escape(search);
+					'&search=' + escape(search);*/
+	var params = '';
 	httpTrackbox.open( 'POST', url, true );
 
 	//Send the proper header information along with the request

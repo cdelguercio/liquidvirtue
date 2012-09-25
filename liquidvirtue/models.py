@@ -26,12 +26,12 @@ class Channel(models.Model):
 	def __unicode__(self):
 		return self.channel_name
 
-class User(models.Model):
-	facebook_username = models.CharField(max_length=500)
-	facebook_id = models.IntegerField()
-
-	def __unicode__(self):
-		return self.facebook_username
+#class User(models.Model):
+#	facebook_username = models.CharField(max_length=500)
+#	facebook_id = models.IntegerField()
+#
+#	def __unicode__(self):
+#		return self.facebook_username
 
 class Video(models.Model):
 	likes = models.ManyToManyField(User, through='Like')
