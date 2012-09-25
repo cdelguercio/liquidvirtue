@@ -74,6 +74,7 @@ def video_detail(request):
 	return render_to_response('video_detail.html', {'video': v, 'page_type': page_type, 'upload_date_text': upload_date_text, 'class_name': class_name})
 
 def trackbox_newest(request, page_number):
+	page_number = int(page_number)
 	v = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
 	
 	now = datetime.now()
@@ -116,6 +117,7 @@ def trackbox_newest(request, page_number):
 	return render_to_response('trackbox.html', {'videos': v, 'upload_date_text': upload_date_text})
 	
 def trackbox_popular(request, page_number):
+	page_number = int(page_number)
 	v = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)-1]
 	
 	now = datetime.now()
@@ -158,6 +160,7 @@ def trackbox_popular(request, page_number):
 	return render_to_response('trackbox.html', {'videos': v, 'upload_date_text': upload_date_text})
 	
 def trackbox_my_library(request, page_number):
+	page_number = int(page_number)
 	#TODO: get user id
 	#id=request.user.id?
 	id=request.user.id

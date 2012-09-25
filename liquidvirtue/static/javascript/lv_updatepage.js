@@ -74,7 +74,7 @@ function updatePage( _pageNumber, _pageType )
 		httpTrackbox = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 
-	var url = '/' + videos + '/' + currentVideoId + '/';
+	var url = '/videos/' + currentVideoId + '/';
 	/*var params =	'pageNumber=' + escape(_pageNumber) +
 					'&user=' + escape(facebook_id) +
 					'&pageType=' + escape(_pageType) +
