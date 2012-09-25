@@ -5,8 +5,8 @@ from django.conf import settings
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'liquidvirtue.views.index', name='index'),
-    (r'^id/(\d+)/$', 'liquidvirtue.views.index_with_id', name='index_with_id'),
+    (r'^$', 'liquidvirtue.views.index', name='index'),
+    #(r'^id/(\d+)/$', 'liquidvirtue.views.index_with_id', name='index_with_id'),
 	(r'^videos/(?P<video_id>\d+)/$', 'liquidvirtue.views.video_detail', name='video_detail'),
 	(r'^newest/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_newest', name='trackbox_newest'),
 	(r'^popular/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_popular', name='trackbox_popular'),
