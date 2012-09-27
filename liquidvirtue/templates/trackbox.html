@@ -1,11 +1,17 @@
-{% for video in videos %}
+{% for video in videos, upload_date_text in upload_date_texts %}
 <div class="post">
 	<h1>{{video.title}}</h1>
-	<p><i></i><b>{{video.channel_name}}</b> (Posted now)</p>
+	<p><i></i><b>{{video.channel_name}}</b> ({{upload_date_text}})</p>
 	<div class="playbar">
 		<div class="play"></div>
 		<div class="plus"></div>
 		<h1>{{video.num_likes}}</h1>
 	</div>
 </div>
+{% empty %}
+	{% if request.user.is_authenticated %}
+		<p>Your library is empty.</p>
+	{% else %}
+		<p>You are not logged in.</p>
+	{% endif %}
 {% endfor %}

@@ -34,13 +34,9 @@ function updatePage( _pageNumber, _pageType )
 		httpPagebox = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 
-	var url = '/' + _pageType + '/' + _pageNumber + '/pagebox/' + timeFrame + '/' + search + '/';
-	/*var params =	'pageNumber=' + escape(_pageNumber) +
-					'&pageType=' + escape(_pageType) +
-					'&user=' + escape(facebook_id) +
-					'&timeFrame=' + escape(timeFrame) +
-					'&search=' + escape(search);*/
-	var params = '';
+	var url = '/' + _pageType + '/' + _pageNumber + '/pagebox/';
+	var params =	'timeFrame=' + escape(timeFrame) +
+					'&search=' + escape(search);
 	httpPagebox.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
@@ -75,14 +71,10 @@ function updatePage( _pageNumber, _pageType )
 	}
 
 	var url = '/' + _pageType + '/' + _pageNumber + '/';
-	/*var params =	'pageNumber=' + escape(_pageNumber) +
-					'&user=' + escape(facebook_id) +
-					'&pageType=' + escape(_pageType) +
-					'&lvVideoId=' + escape(currentVideoId) +
+	var params =	'lvVideoId=' + escape(currentVideoId) +
 					'&currentSection=' + escape(currentSection) +
 					'&timeFrame=' + escape(timeFrame) +
-					'&search=' + escape(search);*/
-	var params = '';
+					'&search=' + escape(search);
 	httpTrackbox.open( 'POST', url, true );
 
 	//Send the proper header information along with the request

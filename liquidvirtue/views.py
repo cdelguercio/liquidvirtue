@@ -75,19 +75,58 @@ def video_detail(request):
 
 def trackbox_newest(request, page_number):
 	page_number = int(page_number)
-	v = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
+	videos = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
+	
+	now = datetime.now()
+	
+	upload_date_texts = []
+	
+	for video in videos, index in enumerate(ints):
+		year_delta = now.year - v.upload_date.year;
+		month_delta = now.month - v.upload_date.month;
+		day_delta = now.day - v.upload_date.day;
+		hour_delta = now.hour - v.upload_date.hour;
+		minute_delta = now.minute - v.upload_date.minute;
+		second_delta = now.second - v.upload_date.second;
+	
+		if year_delta > 1:
+			upload_date_text = 'Posted ' + year_delta + ' years ago'
+		elif year_delta == 1:
+			upload_date_text = 'Posted ' + year_delta + ' year ago'
+		elif month_delta > 1:
+			upload_date_text = 'Posted ' + month_delta + ' months ago'
+		elif month_delta == 1:
+			upload_date_text = 'Posted ' + month_delta + ' month ago'
+		elif day_delta > 1:
+			upload_date_text = 'Posted ' + day_delta + ' days ago'
+		elif day_delta == 1:
+			upload_date_text = 'Posted ' + day_delta + ' day ago'
+		elif hour_delta > 1:
+			upload_date_text = 'Posted ' + hour_delta + ' hours ago'
+		elif hour_delta == 1:
+			upload_date_text = 'Posted ' + hour_delta + ' hour ago'
+		elif minute_delta > 1:
+			upload_date_text = 'Posted ' + minute_delta + ' minutes ago'
+		elif minute_delta == 1:
+			upload_date_text = 'Posted ' + minute_delta + ' minute ago'
+		elif second_delta > 1:
+			upload_date_text = 'Posted ' + second_delta + ' seconds ago'
+		elif second_delta == 1:
+			upload_date_text = 'Posted ' + second_delta + ' second ago'
+		else:
+			upload_date_text = 'Posted now'
+		upload_date_texts.append(upload_date_text);
+	
 	return render_to_response('trackbox.html', {'videos': v})
 
 def trackbox_popular(request, page_number):
 	page_number = int(page_number)
 	v = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)-1]
-	return render_to_response('trackbox.html', {'videos': v})
+	return render_to_response('trackbox.html', {'videos': v, 'upload_date_texts': upload_date_texts})
 	
 def trackbox_my_library(request, page_number):
 	page_number = int(page_number)
-	#TODO: get user id
-	#id=request.user.id?
 	id=request.user.id
-	l = Like.objects.all().filter(lv_user_id=id)
+	l = Like.objects.all().filter(user=id)
 	v = l.video_set().all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
 	return render_to_response('trackbox.html', {'videos': v})
