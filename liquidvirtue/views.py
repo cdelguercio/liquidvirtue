@@ -81,7 +81,7 @@ def trackbox_newest(request, page_number):
 	
 	upload_date_texts = []
 	
-	for video in videos, index in enumerate(videos, start=0):
+	for video in videos:
 		year_delta = now.year - video.upload_date.year;
 		month_delta = now.month - video.upload_date.month;
 		day_delta = now.day - video.upload_date.day;
@@ -115,14 +115,14 @@ def trackbox_newest(request, page_number):
 			upload_date_text = 'Posted ' + second_delta + ' second ago'
 		else:
 			upload_date_text = 'Posted now'
-		upload_date_texts.append(upload_date_text);
+		upload_date_texts.append(upload_date_text)
 	
-	return render_to_response('trackbox.html', {'videos': video})
+	return render_to_response('trackbox.html', {'videos': video, 'upload_date_texts': upload_date_texts})
 
 def trackbox_popular(request, page_number):
 	page_number = int(page_number)
 	videos = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)-1]
-	return render_to_response('trackbox.html', {'videos': videos, 'upload_date_texts': upload_date_texts})
+	return render_to_response('trackbox.html', {'videos': videos})
 	
 def trackbox_my_library(request, page_number):
 	page_number = int(page_number)
