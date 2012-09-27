@@ -1,7 +1,7 @@
 {% for video in videos %}
 <div class="post">
 	<h1>{{video.title}}</h1>
-	<p><i></i><b>{{video.channel_name}}</b> ({{upload_date_texts[forloop.counter0]}})</p>
+	<p><i></i><b>{{video.channel_name}}</b> ({{upload_date_texts.forloop.counter0}})</p>
 	<div class="playbar">
 		<div class="play"></div>
 		<div class="plus"></div>
