@@ -117,7 +117,7 @@ def trackbox_newest(request, page_number):
 			upload_date_text = 'Posted now'
 		upload_date_texts.append(upload_date_text)
 	
-	return render_to_response('trackbox.html', {'videos': video, 'upload_date_texts': upload_date_texts})
+	return render_to_response('trackbox.html', {'videos': videos, 'upload_date_texts': upload_date_texts})
 
 def trackbox_popular(request, page_number):
 	page_number = int(page_number)
