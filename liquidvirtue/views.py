@@ -81,6 +81,8 @@ def trackbox_newest(request, page_number):
 	
 	upload_date_texts = []
 	
+	print now.year
+	
 	for video in videos:
 		year_delta = now.year - video.upload_date.year;
 		month_delta = now.month - video.upload_date.month;
