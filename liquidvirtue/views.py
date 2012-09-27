@@ -59,7 +59,7 @@ def video_detail(request):
 	elif hour_delta > 1:
 		upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
 	elif hour_delta == 1:
-		upload_date_text = 'Posted ' + str(hour_delta + ' hour ago'
+		upload_date_text = 'Posted ' + str(hour_delta) + ' hour ago'
 	elif minute_delta > 1:
 		upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
 	elif minute_delta == 1:
@@ -104,7 +104,7 @@ def trackbox_newest(request, page_number):
 		elif hour_delta > 1:
 			upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
 		elif hour_delta == 1:
-			upload_date_text = 'Posted ' + str(hour_delta + ' hour ago'
+			upload_date_text = 'Posted ' + str(hour_delta) + ' hour ago'
 		elif minute_delta > 1:
 			upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
 		elif minute_delta == 1:
