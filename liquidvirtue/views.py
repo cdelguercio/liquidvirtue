@@ -81,7 +81,7 @@ def trackbox_newest(request, page_number):
 	
 	upload_date_texts = []
 	
-	for video in videos, index in enumerate(ints):
+	for video in videos, index in enumerate(videos, start=0):
 		year_delta = now.year - v.upload_date.year;
 		month_delta = now.month - v.upload_date.month;
 		day_delta = now.day - v.upload_date.day;
