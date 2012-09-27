@@ -45,31 +45,31 @@ def video_detail(request):
 
 	upload_date_text = ''
 	if year_delta > 1:
-			upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
-		elif year_delta == 1:
-			upload_date_text = 'Posted ' + str(year_delta) + ' year ago'
-		elif month_delta > 1:
-			upload_date_text = 'Posted ' + str(month_delta) + ' months ago'
-		elif month_delta == 1:
-			upload_date_text = 'Posted ' + str(month_delta) + ' month ago'
-		elif day_delta > 1:
-			upload_date_text = 'Posted ' + str(day_delta) + ' days ago'
-		elif day_delta == 1:
-			upload_date_text = 'Posted ' + str(day_delta) + ' day ago'
-		elif hour_delta > 1:
-			upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
-		elif hour_delta == 1:
-			upload_date_text = 'Posted ' + str(hour_delta + ' hour ago'
-		elif minute_delta > 1:
-			upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
-		elif minute_delta == 1:
-			upload_date_text = 'Posted ' + str(minute_delta) + ' minute ago'
-		elif second_delta > 1:
-			upload_date_text = 'Posted ' + str(second_delta) + ' seconds ago'
-		elif second_delta == 1:
-			upload_date_text = 'Posted ' + str(second_delta) + ' second ago'
-		else:
-			upload_date_text = 'Posted now'
+		upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
+	elif year_delta == 1:
+		upload_date_text = 'Posted ' + str(year_delta) + ' year ago'
+	elif month_delta > 1:
+		upload_date_text = 'Posted ' + str(month_delta) + ' months ago'
+	elif month_delta == 1:
+		upload_date_text = 'Posted ' + str(month_delta) + ' month ago'
+	elif day_delta > 1:
+		upload_date_text = 'Posted ' + str(day_delta) + ' days ago'
+	elif day_delta == 1:
+		upload_date_text = 'Posted ' + str(day_delta) + ' day ago'
+	elif hour_delta > 1:
+		upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
+	elif hour_delta == 1:
+		upload_date_text = 'Posted ' + str(hour_delta + ' hour ago'
+	elif minute_delta > 1:
+		upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
+	elif minute_delta == 1:
+		upload_date_text = 'Posted ' + str(minute_delta) + ' minute ago'
+	elif second_delta > 1:
+		upload_date_text = 'Posted ' + str(second_delta) + ' seconds ago'
+	elif second_delta == 1:
+		upload_date_text = 'Posted ' + str(second_delta) + ' second ago'
+	else:
+		upload_date_text = 'Posted now'
 
 	return render_to_response('video_detail.html', {'video': video, 'page_type': page_type, 'upload_date_text': upload_date_text, 'class_name': class_name})
 
