@@ -5,6 +5,7 @@ from liquidvirtue.models import Channel
 from liquidvirtue.models import Video
 from datetime import datetime
 from django.template import RequestContext
+from itertools import izip
 
 def index(request):
 	if "np_video_id" in request.session:
@@ -116,8 +117,10 @@ def trackbox_newest(request, page_number):
 		else:
 			upload_date_text = 'Posted now'
 		upload_date_texts.append(upload_date_text)
+		
+		videos_with_upload_date_texts = izip(videos, upload_date_texts)
 	
-	return render_to_response('trackbox.html', {'videos': videos, 'upload_date_texts': upload_date_texts})
+	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts})
 
 def trackbox_popular(request, page_number):
 	page_number = int(page_number)
