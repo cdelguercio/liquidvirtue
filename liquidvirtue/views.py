@@ -75,7 +75,7 @@ def video_detail(request):
 	return render_to_response('video_detail.html', {'video': video, 'page_type': page_type, 'upload_date_text': upload_date_text, 'class_name': class_name})
 
 def trackbox_newest(request, page_number):
-	lv_video_id = request.POST["lvVideoId"]
+	lv_video_id = request.GET["lvVideoId"]
 	page_number = int(page_number)
 	videos = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
 	
