@@ -1,0 +1,17 @@
+{% for video, upload_date_text in videos %}
+<div class="post">
+	<h1 onClick="change_video( {{video.url}}, {{video.watch_page_url}}, {{video.youtube_video_id}}, {{video.title}}, {{video.channel_name}}, {{upload_date_text}}, 'newest', {{lv_video_id}}, this.parentNode.className );this.parentNode.className='nowplaying'">{{video.title}}</h1>
+	<p>{% if video.featured:%}<i></i>{% endif %}<b>{{video.channel_name}}</b> ({{upload_date_text}})</p>
+	<div class="playbar">
+		<button class="play" onClick="change_video( {{video.url}}, {{video.watch_page_url}}, {{video.youtube_video_id}}, {{video.title}}, {{video.channel_name}}, {{upload_date_text}}, 'newest', {{lv_video_id}}, this.parentNode.parentNode.className );this.parentNode.parentNode.className='nowplaying'" ></button>
+		<div class="plus"></div>
+		<h1>{{video.num_likes}}</h1>
+	</div>
+</div>
+{% empty %}
+	{% if request.user.is_authenticated %}
+		<p>Your library is empty.</p>
+	{% else %}
+		<p>You are not logged in.</p>
+	{% endif %}
+{% endfor %}

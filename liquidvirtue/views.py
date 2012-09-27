@@ -75,6 +75,7 @@ def video_detail(request):
 	return render_to_response('video_detail.html', {'video': video, 'page_type': page_type, 'upload_date_text': upload_date_text, 'class_name': class_name})
 
 def trackbox_newest(request, page_number):
+	lv_video_id = request.GET["lvVideoId"]
 	page_number = int(page_number)
 	videos = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
 	
@@ -120,16 +121,16 @@ def trackbox_newest(request, page_number):
 		
 		videos_with_upload_date_texts = izip(videos, upload_date_texts)
 	
-	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts})
+	return render_to_response('trackbox_newest.html', {'videos': videos_with_upload_date_texts, 'lv_video_id':lv_video_id})
 
 def trackbox_popular(request, page_number):
 	page_number = int(page_number)
 	videos = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)-1]
-	return render_to_response('trackbox.html', {'videos': videos})
+	return render_to_response('trackbox_popular.html', {'videos': videos})
 	
 def trackbox_my_library(request, page_number):
 	page_number = int(page_number)
 	id = request.user.id
 	l = Like.objects.all().filter(user=id)
 	videos = l.video_set().all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
-	return render_to_response('trackbox.html', {'videos': videos})
+	return render_to_response('trackbox_my_library.html', {'videos': videos})
