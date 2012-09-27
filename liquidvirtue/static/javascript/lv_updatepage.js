@@ -34,7 +34,7 @@ function updatePage( _pageNumber, _pageType )
 		httpPagebox = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 
-	var url = '/' + _pageType + '/' + _pageNumber + '/';
+	var url = '/' + _pageType + '/' + _pageNumber + '/pagebox/' + timeFrame + '/' + search + '/';
 	/*var params =	'pageNumber=' + escape(_pageNumber) +
 					'&pageType=' + escape(_pageType) +
 					'&user=' + escape(facebook_id) +
@@ -74,7 +74,7 @@ function updatePage( _pageNumber, _pageType )
 		httpTrackbox = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 
-	var url = '/videos/' + currentVideoId + '/';
+	var url = '/' + _pageType + '/' + _pageNumber + '/';
 	/*var params =	'pageNumber=' + escape(_pageNumber) +
 					'&user=' + escape(facebook_id) +
 					'&pageType=' + escape(_pageType) +
