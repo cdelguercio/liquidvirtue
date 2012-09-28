@@ -34,8 +34,8 @@ function updatePage( _pageNumber, _pageType )
 		httpPagebox = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 
-	var url = '/' + _pageType + '/' + _pageNumber + '/pagebox/';
-	var params =	'timeFrame=' + escape(timeFrame) +
+	var url = '/pagebox/' + _pageType + '/' + _pageNumber + '/';
+	var params =	'time_frame=' + escape(timeFrame) +
 					'&search=' + escape(search);
 	httpPagebox.open( 'POST', url, true );
 
@@ -190,12 +190,12 @@ function generate_trackinfo( _title, _channel, _upload_date_text, _watchPageUrl,
 	http.send( params );
 }
 
-function change_video( _url, _watchPageUrl, _videoId, _title, _channel, _uploadDateText, _section, _id, _postType )
+function change_video( _url, _watchPageUrl, _videoId, _title, _channel, _uploadDateText, _section, _lv_video_id, _postType )
 {
 	if( _postType == 'post' || _postType == 'featured' )
 	{
 		currentSection = _section;
-		currentVideoId = _id;
+		currentVideoId = _lv_video_id;
 		var elements = document.getElementsByClassName( 'nowplaying' );
 		for( var i = 0; i < elements.length; i++ )
 		{
@@ -209,7 +209,7 @@ function change_video( _url, _watchPageUrl, _videoId, _title, _channel, _uploadD
 			}
 		}
 		player.loadVideoById( _videoId, 0, 'large' );
-		generate_trackinfo( _title, _channel, _uploadDateText, _watchPageUrl, _id );
+		generate_trackinfo( _title, _channel, _uploadDateText, _watchPageUrl, _lv_video_id );
 	}
 }
 

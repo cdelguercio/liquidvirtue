@@ -1,0 +1,63 @@
+{% if page_type == 'popular' %}
+	<div class="timefilter">
+		<button id="pop_alltime" class="btn_x" onclick="update_time_frame( 'alltime', 'popular' );updatePage({{page_number}}, '{{page_type}}')">All Time</button>
+		<button id="pop_month" class="btn" onclick="update_time_frame( 'month', 'popular' );updatePage({{page_number}}, '{{page_type}}')">Month</button>
+		<button id="pop_week" class="btn" onclick="update_time_frame( 'week', 'popular' );updatePage({{page_number}}, '{{page_type}}')">Week</button>
+		<button id="pop_day" class="btn" onclick="update_time_frame( 'day', 'popular' );updatePage({{page_number}}, '{{page_type}}')">Day</button>
+	</div>
+{$ endif %}
+
+<div class="next" onClick="updatePage({{page_number}} + 1, '{{page_type}}')">Next</div>
+<div class="prev" onClick="updatePage({{page_number}} - 1, ', ''{{page_type}}')">Prev</div>
+<div class="list">
+
+{% if page_number < 5 %}
+	{% if max_pages < 7 %}
+		{% for index in enumerate( max_pages, start=1 ) %}
+			<div onClick="updatePage({{index}}, '{{page_type}}')"
+			{% if page_number == index %}
+				class="x"
+			{% endif %}
+			>{{index}}</div>
+		{% endfor %}
+	{% else %}
+		{% for index in enumerate( 7, start=1 ) %}
+			<div onClick="updatePage({{index}}, '{{page_type}}')"
+			{% if page_number == index %}
+				class="x"
+			{% endif %}
+			>{{index}}</div>
+		{% endfor %}
+	{% endif %}
+{% else %}
+	{% if page_number + 3 <= max_pages %}
+		{% for index in range(page_number - 3:page_number + 3) %}
+			<div onClick="updatePage({{index}}, '{{page_type}}')"
+			{% if page_number == index %}
+				class="x"
+			{% endif %}
+			>{{index}}</div>
+		{% endfor %}
+	{% else %}
+		{% with start_page = max_pages - 6 %}
+			{% if start_page < 1 %}
+				{% for index in range(1:max_pages) %}
+					<div onClick="updatePage({{index}}, '{{page_type}}')"
+					{% if page_number == index %}
+						class="x"
+					{% endif %}
+					>{{index}}</div>
+				{% endfor %}
+			{% else %}
+				{% for index in range(start_page:max_pages) %}
+					<div onClick="updatePage({{index}}, '{{page_type}}')"
+					{% if page_number == index %}
+						class="x"
+					{% endif %}
+					>{{index}}</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+	{% endif %}
+{% endif %}
+</div>
