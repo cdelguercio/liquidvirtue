@@ -13,7 +13,7 @@
 
 {% if page_number < 5 %}
 	{% if max_pages < 7 %}
-		{% for index in enumerate( max_pages, start=1 ) %}
+		{% for index in range(1:max_pages) %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
@@ -21,7 +21,7 @@
 			>{{index}}</div>
 		{% endfor %}
 	{% else %}
-		{% for index in enumerate( 7, start=1 ) %}
+		{% for index in range(1:7) %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
