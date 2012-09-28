@@ -134,3 +134,19 @@ def trackbox_my_library(request, page_number):
 	l = Like.objects.all().filter(user=id)
 	videos = l.video_set().all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
 	return render_to_response('trackbox_my_library.html', {'videos': videos})
+
+def trackinfo(request):
+	title = request.POST["title"]
+	channel = request.POST["channel"]
+	upload_date_text = request.POST["upload_date_text"]
+	lv_video_id = request.POST["lv_video_id"]
+	likes = Like.objects.all().filter(user=request.user.id, video_id=lv_video_id)
+	class_name = ''
+	alt_text = ''
+	if likes:
+		class_name = 'heart'
+		alt_text = 'Remove this track from your playlist'
+	else:
+		class_name = 'plus'
+		alt_text = 'Add this track from your playlist'
+	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel': channel, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id})

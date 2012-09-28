@@ -91,7 +91,7 @@ function updatePage( _pageNumber, _pageType )
 	httpTrackbox.send( params );
 }
 
-function hit_like( _title, _id )
+function hit_like( _lv_video_id, _id )
 {
 	var http;
 	
@@ -105,7 +105,7 @@ function hit_like( _title, _id )
 	}
 	
 	var url = 'ajax/like_response.php';
-	var params = 'title=' + escape(_title) + '&user=' + escape(facebook_id);
+	var params = 'lv_video_id=' + escape(_lv_video_id);
 	http.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
@@ -154,7 +154,7 @@ function post_to_facebook( _id )
 	http.send( params );
 }
 
-function generate_trackinfo( _title, _channel, _uploadDateText, _watchPageUrl, _id )
+function generate_trackinfo( _title, _channel, _upload_date_text, _watchPageUrl, _lv_video_id )
 {
 	var http;
 	
@@ -168,9 +168,8 @@ function generate_trackinfo( _title, _channel, _uploadDateText, _watchPageUrl, _
 	}
 	
 	
-	var url = 'ajax/trackinfo_response.php';
-	var params =	'title=' + escape(_title) +
-					'&user=' + escape(facebook_id);
+	var url = '/trackinfo/';
+	var params =	'title' + escape(_title) + '&channel' + escape(_channel) + '&upload_date_text' + escape(_upload_date_text) + '&watchPageUrl' + escape(_watchPageUrl) + '&lv_video_id=' + escape(_lv_video_id);
 	http.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
@@ -180,14 +179,7 @@ function generate_trackinfo( _title, _channel, _uploadDateText, _watchPageUrl, _
 	{
 		if( http.readyState == 4 && http.status == 200 )
 		{
-			document.getElementById( "trackinfo" ).innerHTML = '<button id="playpause" class="pause"></button><button id="progress" class="progressBar"><div id="elapsed" class="elapsed"></div></button>'
-			+ '<h1>' + _title + '</h1><p><b onclick="window.open(\'http://www.youtube.com/' + _channel + '\')">' + _channel + '</b> (' + _uploadDateText + ')<br />'
-			+ '<div id="viewpost" class="viewpost" onclick="window.open(\'' + _watchPageUrl + '\')"><p>View post on youtube</p></div>'
-			+ '<div class="btnspace"></div>'
-			+ '<div id="sharesong" class="sharesong" onclick="window.open(\'http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.liquidvirtue.com%2F%3Fid%3D' + escape(_id) + '&t=The%20newest%20drum%20and%20bass%20tracks\')"><p>Share this track on facebook</p></div>'
-			//+ '<div id="sharesong" class="sharesong" onclick="post_to_facebook( ' + _id + ' )"><p>Share this track on facebook</p></div>'
-			+ '<div class="btnspace"></div>'
-			+ '<div id="like_big"' + http.responseText + '</p></div>';
+			document.getElementById( "trackinfo" ).innerHTML = http.responseText;
 			document.getElementById( 'trackinfo' ).style.visibility = 'visible';
 			
 			document.getElementById( 'progress' ).onclick = change_progress;

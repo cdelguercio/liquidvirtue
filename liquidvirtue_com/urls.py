@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 	url(r'^newest/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_newest', name='trackbox_newest'),
 	url(r'^popular/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_popular', name='trackbox_popular'),
 	url(r'^my_library/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_my_library', name='trackbox_my_library'),
+	url(r'^trackinfo/$', 'liquidvirtue.views.trackinfo', name='trackinfo'),
     #
     (r'^facebook/', include('django_facebook.urls')),
     
