@@ -100,8 +100,8 @@ function playNext()
 		http = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 
-	var url = 'ajax/get_next_response.php';
-	var params = 'currentVideoId=' + escape(currentVideoId) + '&currentSection=' + escape(currentSection) + '&user=' + escape(name) + '&timeFrame=' + timeFrame + '&search=' + search;
+	var url = '/get_next/';
+	var params = 'currentVideoId=' + escape(currentVideoId) + '&currentSection=' + escape(currentSection) + '&timeFrame=' + timeFrame + '&search=' + search;
 	http.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
@@ -146,56 +146,43 @@ function playNext()
 				secondDifference = currentTime.getSeconds() - uploadSecond;
 				
 				uploadDateText = "";
-				if( yearDifference > 1 )
-				{
+				if( yearDifference > 1 ) {
 					uploadDateText = 'Posted ' + yearDifference + ' years ago';
 				}
-				else if( yearDifference == 1 )
-				{
+				else if( yearDifference == 1 ) {
 					uploadDateText = 'Posted ' + yearDifference + ' year ago';
 				}
-				else if( monthDifference > 1 )
-				{
+				else if( monthDifference > 1 ) {
 					uploadDateText = 'Posted ' + monthDifference + ' months ago';
 				}
-				else if( monthDifference == 1 )
-				{
+				else if( monthDifference == 1 ) {
 					uploadDateText = 'Posted ' + monthDifference + ' month ago';
 				}
-				else if( dayDifference > 1 )
-				{
+				else if( dayDifference > 1 ) {
 					uploadDateText = 'Posted ' + dayDifference + ' days ago';
 				}
-				else if( dayDifference == 1 )
-				{
+				else if( dayDifference == 1 ) {
 					uploadDateText = 'Posted ' + dayDifference + ' day ago';
 				}
-				else if( hourDifference > 1 )
-				{
+				else if( hourDifference > 1 ) {
 					uploadDateText = 'Posted ' + hourDifference + ' hours ago';
 				}
-				else if( hourDifference == 1 )
-				{
+				else if( hourDifference == 1 ) {
 					uploadDateText = 'Posted ' + hourDifference + ' hour ago';
 				}
-				else if( minuteDifference > 1 )
-				{
+				else if( minuteDifference > 1 ) {
 					uploadDateText = 'Posted ' + minuteDifference + ' minutes ago';
 				}
-				else if( minuteDifference == 1 )
-				{
+				else if( minuteDifference == 1 ) {
 					uploadDateText = 'Posted ' + minuteDifference + ' minute ago';
 				}
-				else if( secondDifference > 1 )
-				{
+				else if( secondDifference > 1 ) {
 					uploadDateText = 'Posted ' + secondDifference + ' seconds ago';
 				}
-				else if( secondDifference == 1 )
-				{
+				else if( secondDifference == 1 ) {
 					uploadDateText = 'Posted ' + secondDifference + ' second ago';
 				}
-				else
-				{
+				else {
 					uploadDateText = 'Posted now';
 				}
 

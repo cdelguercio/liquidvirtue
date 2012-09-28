@@ -169,7 +169,7 @@ function generate_trackinfo( _title, _channel, _upload_date_text, _watchPageUrl,
 	
 	
 	var url = '/trackinfo/';
-	var params =	'title' + escape(_title) + '&channel' + escape(_channel) + '&upload_date_text' + escape(_upload_date_text) + '&watchPageUrl' + escape(_watchPageUrl) + '&lv_video_id=' + escape(_lv_video_id);
+	var params =	'title=' + escape(_title) + '&channel=' + escape(_channel) + '&upload_date_text=' + escape(_upload_date_text) + '&watchPageUrl=' + escape(_watchPageUrl) + '&lv_video_id=' + escape(_lv_video_id);
 	http.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
@@ -179,7 +179,7 @@ function generate_trackinfo( _title, _channel, _upload_date_text, _watchPageUrl,
 	{
 		if( http.readyState == 4 && http.status == 200 )
 		{
-			document.getElementById( "trackinfo" ).innerHTML = http.responseText;
+			document.getElementById( 'trackinfo' ).innerHTML = http.responseText;
 			document.getElementById( 'trackinfo' ).style.visibility = 'visible';
 			
 			document.getElementById( 'progress' ).onclick = change_progress;
