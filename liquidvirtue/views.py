@@ -6,6 +6,7 @@ from liquidvirtue.models import Video
 from datetime import datetime
 from django.template import RequestContext
 from itertools import izip
+from math import floor
 
 def index(request):
 	if "np_video_id" in request.session:
