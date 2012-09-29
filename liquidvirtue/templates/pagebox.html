@@ -31,8 +31,8 @@
 		{% endfor %}
 	{% endif %}
 {% else %}
-	{% if page_number + 3 <= max_pages %}
-		{% for index in (page_number - 3)|get_range:(page_number + 3) %}
+	{% if page_number|add:"3" <= max_pages %}
+		{% for index in (page_number|add:"-3")|get_range:(page_number|add:"3") %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
@@ -40,7 +40,7 @@
 			>{{index}}</div>
 		{% endfor %}
 	{% else %}
-		{% with start_page = max_pages - 6 %}
+		{% with start_page = max_pages|add:"-6" %}
 			{% if start_page < 1 %}
 				{% for index in 1|get_range:max_pages %}
 					<div onClick="updatePage({{index}}, '{{page_type}}')"
