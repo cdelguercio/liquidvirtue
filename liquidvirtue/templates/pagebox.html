@@ -1,3 +1,4 @@
+{% load liquidvirtue_extras %}
 {% if page_type == 'popular' %}
 	<div class="timefilter">
 		<button id="pop_alltime" class="btn_x" onclick="update_time_frame( 'alltime', 'popular' );updatePage({{page_number}}, '{{page_type}}')">All Time</button>
@@ -13,7 +14,7 @@
 
 {% if page_number < 5 %}
 	{% if max_pages < 7 %}
-		{% for index in range(1,max_pages) %}
+		{% for index in 1|get_range:max_pages %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
@@ -21,7 +22,7 @@
 			>{{index}}</div>
 		{% endfor %}
 	{% else %}
-		{% for index in range(1,7) %}
+		{% for index in 1|get_range:7 %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
@@ -31,7 +32,7 @@
 	{% endif %}
 {% else %}
 	{% if page_number + 3 <= max_pages %}
-		{% for index in range(page_number - 3,page_number + 3) %}
+		{% for index in (page_number - 3)|get_range:(page_number + 3) %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
@@ -41,7 +42,7 @@
 	{% else %}
 		{% with start_page = max_pages - 6 %}
 			{% if start_page < 1 %}
-				{% for index in range(1,max_pages) %}
+				{% for index in 1|get_range:max_pages %}
 					<div onClick="updatePage({{index}}, '{{page_type}}')"
 					{% if page_number == index %}
 						class="x"
@@ -49,7 +50,7 @@
 					>{{index}}</div>
 				{% endfor %}
 			{% else %}
-				{% for index in range(start_page,max_pages) %}
+				{% for index in start_page|get_range:max_pages %}
 					<div onClick="updatePage({{index}}, '{{page_type}}')"
 					{% if page_number == index %}
 						class="x"
