@@ -32,7 +32,7 @@
 	{% endif %}
 {% else %}
 	{% if page_number|add:"3" <= max_pages %}
-		{% for index in (page_number|add:"-3")|get_range:(page_number|add:"3") %}
+		{% for index in page_number|add:"-3"|get_range:page_number|add:"3" %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
