@@ -40,7 +40,7 @@
 			>{{index}}</div>
 		{% endfor %}
 	{% else %}
-		{% with start_page = max_pages - 6 %}
+		{% with max_pages|add:"-6" as start_page %}
 			{% if start_page < 1 %}
 				{% for index in 1|get_range:max_pages %}
 					<div onClick="updatePage({{index}}, '{{page_type}}')"
