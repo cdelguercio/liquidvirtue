@@ -6,7 +6,7 @@
 		<button id="pop_week" class="btn" onclick="update_time_frame( 'week', 'popular' );updatePage({{page_number}}, '{{page_type}}')">Week</button>
 		<button id="pop_day" class="btn" onclick="update_time_frame( 'day', 'popular' );updatePage({{page_number}}, '{{page_type}}')">Day</button>
 	</div>
-{$ endif %}
+{% endif %}
 
 <div class="next" onClick="updatePage({{page_number}} + 1, '{{page_type}}')">Next</div>
 <div class="prev" onClick="updatePage({{page_number}} - 1, ', ''{{page_type}}')">Prev</div>
