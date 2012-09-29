@@ -21,4 +21,4 @@ def get_range( start_value, end_value ):
 	
 		Instead of 3 one may use the variable set in the views
 	"""
-	return range( start_value, end_value )
+	return range( int(start_value), int(end_value) )
