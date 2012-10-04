@@ -7,7 +7,7 @@
 		<button id="pop_day" class="btn" onclick="update_time_frame( 'day', 'popular' );updatePage({{page_number}}, '{{page_type}}')">Day</button>
 	</div>
 {% endif %}
-<!-- max_pages: {{max_pages}} page_type: {{page_type}} page_number: {{page_number}} -->
+<!-- max_pages: {{max_pages}} page_type: {{page_type}} page_number: {{page_number}} num_videos: {{num_videos}} -->
 <div class="next" onClick="updatePage({{page_number|add:"1"}}, '{{page_type}}')">Next</div>
 <div class="prev" onClick="updatePage({{page_number|add:"-1"}}, '{{page_type}}')">Prev</div>
 <div class="list">

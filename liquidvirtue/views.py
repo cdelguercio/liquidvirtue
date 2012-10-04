@@ -22,12 +22,13 @@ def pagebox(request, page_type, page_number):
 	search = request.POST["search"]
 	num_videos = Video.objects.count()
 
-	max_pages = floor( (num_videos - 1) / 17 ) + 1
+	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
+	page_number = int( page_number )
 
 	if page_number > max_pages:
 		page_number = max_pages
 
-	return render_to_response('pagebox.html', {'page_type': page_type, 'page_number': page_number, 'max_pages': max_pages})
+	return render_to_response('pagebox.html', {'page_type': page_type, 'page_number': page_number, 'max_pages': max_pages, 'num_videos': num_videos})
 
 def trackbox_newest(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
