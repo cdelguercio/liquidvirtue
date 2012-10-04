@@ -22,76 +22,50 @@
 	<div class="liquidvirtue">
 	<!-- ENTER THE LIQUID -->
 
-	<!-- LEFT -->
-	<div class="left">
-		<div class="logo"></div>
-		<div id="video" class="video"></div>
-		<div id="trackinfo" class="trackinfo">
+		<!-- LEFT -->
+		<div class="left">
+			<div class="logo"></div>
+			<div id="video" class="video"></div>
+			<div id="trackinfo" class="trackinfo">
 				<button id="progress" class="progressBar">
 					<div id="elapsed" class="elapsed"></div>
 				</button>
 				<div id="viewpost" class="viewpost"><p>View post on youtube</p></div>
-                <div class="btnspace"></div>
-                <div id="sharesong" class="sharesong"><p>Share this track on facebook</p></div>
-                <div class="btnspace"></div>
-                <div id="like_big" class="plus"><p>Add this track to your playlist</p></div>
-            </div>
-        </div>
-        
-        <!-- RIGHT -->
-        <div class="right">
-        	<div class="navbox"><ul>
-            	<li><a onClick="updatePage( 1, 'newest' );document.title='L+V Newest Tracks'">Newest Tracks</a></li>
-                <li><a onClick="updatePage( 1, 'popular' );document.title='L+V Popular Tracks'">Popular Tracks</a></li>
-                <li><a onClick="updatePage( 1, 'my_library' );document.title='L+V My Library'">My Library</a></li>
-            </ul>
-            <p>{% include 'login.html' %}</p>
-            </div>
-            <div id="arrow" class="newest"></div>
-        	<div id="pagebox_upper" class="pagebox">
-          	</div>
-			
+				<div class="btnspace"></div>
+				<div id="sharesong" class="sharesong"><p>Share this track on facebook</p></div>
+				<div class="btnspace"></div>
+				<div id="like_big" class="plus"><p>Add this track to your playlist</p></div>
+			</div>
+		</div>
+
+		<!-- RIGHT -->
+		<div class="right">
+			<div class="navbox"><ul>
+				<li><a onClick="updatePage( 1, 'newest' );document.title='L+V Newest Tracks'">Newest Tracks</a></li>
+				<li><a onClick="updatePage( 1, 'popular' );document.title='L+V Popular Tracks'">Popular Tracks</a></li>
+				<li><a onClick="updatePage( 1, 'my_library' );document.title='L+V My Library'">My Library</a></li>
+			</ul>
+			<p>{% include 'login.html' %}</p>
+			</div>
+			<div id="arrow" class="newest"></div>
+			<div id="pagebox_upper" class="pagebox"></div>
+
 			<div class="searchbox">
-                    <button id="searchbutton" class="search" onclick="updatePage( 1, 'search' )">Search</button>
-                    <input id="searchbar" class="searchbar" value="" onkeypress="submitSearch( event )"/>
-            </div>
-            
-            <div id="searchresults" class="searchresults"><h1>Search results for: <b id="searchedterm"></b></h1></div>
-			
-            <div class="trackbox" id="trackbox">
-            </div>
-            
-            <div id="pagebox_lower" class="pagebox">
-          	</div>
-        </div>
-        
-        {% include 'footer.html' %}
-        
-    <!-- EXIT LIQUID -->
-    </div>
-	<!--<div id="fb-root"></div>
-	<script>               
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId: '<?php echo $facebook->getAppID() ?>', 
-				cookie: true, 
-				xfbml: true,
-				oauth: true
-			});
-			FB.Event.subscribe('auth.login', function(response) {
-				window.location.reload();
-			});
-			FB.Event.subscribe('auth.logout', function(response) {
-				window.location.reload();
-			});
-		};
-		(function() {
-			var e = document.createElement('script'); e.async = true;
-			e.src = document.location.protocol +
-				'//connect.facebook.net/en_US/all.js';
-			document.getElementById('fb-root').appendChild(e);
-		}());
-	</script>-->
+				<button id="searchbutton" class="search" onclick="updatePage( 1, 'search' )">Search</button>
+				<input id="searchbar" class="searchbar" value="" onkeypress="submitSearch( event )"/>
+			</div>
+
+			<div id="searchresults" class="searchresults"><h1>Search results for: <b id="searchedterm"></b></h1></div>
+
+			<div class="trackbox" id="trackbox"></div>
+
+			<div id="pagebox_lower" class="pagebox"></div>
+		</div>
+
+		{% include 'footer.html' %}
+
+	<!-- EXIT LIQUID -->
+	</div>
 	{% include 'django_facebook/_facebook_js.html' %}
 	{% include 'preload_footer.html' %}
 </body>
