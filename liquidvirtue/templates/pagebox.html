@@ -14,7 +14,7 @@
 
 {% if page_number < 5 %}
 	{% if max_pages < 7 %}
-		{% for index in 1|get_range:max_pages %}
+		{% for index in 1|get_range:max_pages|add:"1" %} //get_range is EXCLUSIVE to the second value, so need to add one
 			<div id="test" onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
@@ -22,7 +22,7 @@
 			>{{index}}</div>
 		{% endfor %}
 	{% else %}
-		{% for index in 1|get_range:7 %}
+		{% for index in 1|get_range:8 %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
@@ -32,7 +32,7 @@
 	{% endif %}
 {% else %}
 	{% if page_number|add:"3" <= max_pages %}
-		{% for index in page_number|add:"-3"|get_range:page_number|add:"3" %}
+		{% for index in page_number|add:"-3"|get_range:page_number|add:"4" %}
 			<div onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
@@ -42,7 +42,7 @@
 	{% else %}
 		{% with max_pages|add:"-6" as start_page %}
 			{% if start_page < 1 %}
-				{% for index in 1|get_range:max_pages %}
+				{% for index in 1|get_range:max_pages|add:"1" %}
 					<div onClick="updatePage({{index}}, '{{page_type}}')"
 					{% if page_number == index %}
 						class="x"
@@ -50,7 +50,7 @@
 					>{{index}}</div>
 				{% endfor %}
 			{% else %}
-				{% for index in start_page|get_range:max_pages %}
+				{% for index in start_page|get_range:max_pages|add:"1" %}
 					<div onClick="updatePage({{index}}, '{{page_type}}')"
 					{% if page_number == index %}
 						class="x"

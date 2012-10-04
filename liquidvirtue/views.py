@@ -37,6 +37,8 @@ def trackbox_newest(request, page_number):
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
 	if page_number > max_pages:
 		page_number = max_pages
+	if page_number <= 0:
+		page_number = 1
 	videos = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
 	
 	now = datetime.now()
