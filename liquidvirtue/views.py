@@ -32,7 +32,11 @@ def pagebox(request, page_type, page_number):
 
 def trackbox_newest(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
-	page_number = int(page_number)
+	page_number = int( page_number )
+	num_videos = Video.objects.count()
+	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
+	if page_number > max_pages:
+		page_number = max_pages
 	videos = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
 	
 	now = datetime.now()

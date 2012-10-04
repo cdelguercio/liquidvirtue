@@ -15,7 +15,7 @@
 {% if page_number < 5 %}
 	{% if max_pages < 7 %}
 		{% for index in 1|get_range:max_pages %}
-			<div onClick="updatePage({{index}}, '{{page_type}}')"
+			<div id="test" onClick="updatePage({{index}}, '{{page_type}}')"
 			{% if page_number == index %}
 				class="x"
 			{% endif %}
