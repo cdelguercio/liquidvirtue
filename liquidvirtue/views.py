@@ -28,7 +28,29 @@ def pagebox(request, page_type, page_number):
 	if page_number > max_pages:
 		page_number = max_pages
 
-	return render_to_response('pagebox.html', {'page_type': page_type, 'page_number': page_number, 'max_pages': max_pages, 'num_videos': num_videos})
+	start_page = 0
+	end_page = 0
+	
+	if page_number < 5:
+		if max_pages < 7:
+			start_page = 1
+			end_page = max_page
+		else:
+			start_page = 1
+			end_page = 7
+	else:
+		if page_number + 3 <= max_pages:
+			start_page = page_number - 3
+			end_page = page_number + 3
+		else:
+			if max_pages - 6 < 1:
+				start_page = 1
+				end_page = max_pages
+			else:
+				start_page = max_pages - 6
+				end_page = max_pages
+
+	return render_to_response('pagebox.html', {'page_type': page_type, 'page_number': page_number, 'start_page': start_page, 'end_page': end_page})
 
 def trackbox_newest(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
