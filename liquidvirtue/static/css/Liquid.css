@@ -235,7 +235,7 @@ body {
 	-moz-transition:background-color 0.4s ease;
 	-o-transition:background-color 0.4s ease;
 	transition:background-color 0.4s ease;
-	background-image:url(/static/images/bigheart.png);
+	background-image:url(/static/images/bigplus.png);
 }
 .left .trackinfo .heart {
 	float:left;
