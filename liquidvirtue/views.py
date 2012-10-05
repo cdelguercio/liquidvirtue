@@ -18,8 +18,8 @@ def index_with_id(request, np_video_id):
 	return render_to_response('index.html', {'np_video_id': request.session["np_video_id"]})
 
 def pagebox(request, page_type, page_number):
-	time_frame = request.POST["time_frame"]
-	search = request.POST["search"]
+	//time_frame = request.POST["time_frame"]
+	//search = request.POST["search"]
 	num_videos = Video.objects.count()
 
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
