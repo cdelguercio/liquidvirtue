@@ -157,7 +157,7 @@ def trackbox_popular(request, page_number):
 	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts})
 	
 def trackbox_my_library(request, page_number):
-	lv_video_id = request.POST["lvVideoId"]
+	#lv_video_id = request.POST["lvVideoId"]
 	page_number = int(page_number)
 	id = request.user.id
 	l = Like.objects.all().filter(user=id)
