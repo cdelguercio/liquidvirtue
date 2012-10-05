@@ -50,7 +50,7 @@ def pagebox(request, page_type, page_number):
 				start_page = max_pages - 6
 				end_page = max_pages
 
-	return render_to_response('pagebox.html', {'page_type': page_type, 'page_number': page_number, 'start_page': start_page, 'end_page': end_page})
+	return render_to_response('pagebox.html', {'page_type': page_type, 'page_number': page_number, 'start_page': start_page, 'end_page': end_page + 1}) #end_page + 1 because range is EXCLUSIVE of the stop value
 
 def trackbox_newest(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
@@ -61,7 +61,7 @@ def trackbox_newest(request, page_number):
 		page_number = max_pages
 	if page_number <= 0:
 		page_number = 1
-	videos = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
+	videos = Video.objects.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
@@ -110,7 +110,7 @@ def trackbox_newest(request, page_number):
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
 	page_number = int(page_number)
-	videos = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)-1]
+	videos = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
@@ -161,7 +161,7 @@ def trackbox_my_library(request, page_number):
 	page_number = int(page_number)
 	id = request.user.id
 	l = Like.objects.all().filter(user=id)
-	videos = l.video_set().all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)-1]
+	videos = l.video_set().all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
