@@ -105,7 +105,7 @@ def trackbox_newest(request, page_number):
 		
 	videos_with_upload_date_texts = izip(videos, upload_date_texts)
 	
-	return render_to_response('trackbox_newest.html', {'videos': videos_with_upload_date_texts, 'lv_video_id':lv_video_id})
+	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts, 'lv_video_id':lv_video_id})
 
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
@@ -154,7 +154,7 @@ def trackbox_popular(request, page_number):
 		
 	videos_with_upload_date_texts = izip(videos, upload_date_texts)
 
-	return render_to_response('trackbox_popular.html', {'videos': videos})
+	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts})
 	
 def trackbox_my_library(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
@@ -205,7 +205,7 @@ def trackbox_my_library(request, page_number):
 		
 	videos_with_upload_date_texts = izip(videos, upload_date_texts)
 
-	return render_to_response('trackbox_my_library.html', {'videos': videos})
+	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts})
 
 def trackinfo(request):
 	title = request.POST["title"]
