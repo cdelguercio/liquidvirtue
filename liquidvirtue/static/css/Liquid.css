@@ -284,7 +284,7 @@ body {
 	float:left;
 	margin:0px;
 }
-.right .navbox p {
+.right .navbox form a {
 	float:right;
 	font-size:14px;
 	font-family:hlc, Helvetica, Arial, Verdana, sans-serif;
@@ -339,7 +339,7 @@ body {
 	background-repeat:no-repeat;
 	background-color:#000;
 }
-.right .mylibrary {
+.right .my_library {
 	width:37px;
 	height:19px;
 	float:left;
