@@ -284,6 +284,16 @@ body {
 	float:left;
 	margin:0px;
 }
+.right .navbox a {
+	float:right;
+	font-size:14px;
+	font-family:hlc, Helvetica, Arial, Verdana, sans-serif;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	color:#02c8bc;
+	margin:50px 0px 0px 0px;
+	text-decoration:none;
+}
 .right .navbox form a {
 	float:right;
 	font-size:14px;
