@@ -34,7 +34,7 @@ def pagebox(request, page_type, page_number):
 	if page_number < 5:
 		if max_pages < 7:
 			start_page = 1
-			end_page = max_page
+			end_page = max_pages
 		else:
 			start_page = 1
 			end_page = 7
