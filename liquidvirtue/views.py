@@ -160,8 +160,9 @@ def trackbox_my_library(request, page_number):
 	#lv_video_id = request.POST["lvVideoId"]
 	page_number = int(page_number)
 	id = request.user.id
-	l = Like.objects.all().filter(user=id)
-	videos = l.all().video_set.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
+	videos = Video.objects.filter(like__user__exact=id).order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
+	#l = Like.objects.all().filter(user=id)
+	#videos = l.all().video_set.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
