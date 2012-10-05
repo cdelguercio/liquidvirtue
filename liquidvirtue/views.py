@@ -161,7 +161,7 @@ def trackbox_my_library(request, page_number):
 	page_number = int(page_number)
 	id = request.user.id
 	l = Like.objects.all().filter(user=id)
-	videos = l.video_set().all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
+	videos = l.video_set.all().order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
