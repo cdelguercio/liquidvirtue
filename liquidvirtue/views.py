@@ -20,8 +20,12 @@ def index_with_id(request, np_video_id):
 def like(request, lv_video_id):
 	like_status = ''
 	if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
+		l = Like.objects.filter(user=request.user.id).filter(video=lv_video_id)
+		l.delete()
 		like_status = 'plus'
 	else:
+		l = Like( video=lv_video_id, user=request.user.id )
+		l.save()
 		like_status = 'heart'
 	return render_to_response('like.html', {'like_status': like_status})
 

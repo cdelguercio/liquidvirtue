@@ -252,7 +252,7 @@ body {
 	-moz-transition:background-color 0.4s ease;
 	-o-transition:background-color 0.4s ease;
 	transition:background-color 0.4s ease;
-	background-image:url(/static/images/bigunheart.png);
+	background-image:url(/static/images/bigunplus.png);
 }
 
 .left .trackinfo .viewpost:hover {background-color:#02c8bc;cursor:pointer;}
@@ -624,11 +624,11 @@ body {
 	background-color:#fff;
 	margin:0px;
 	float:right;
-	background-image:url(/static/images/heart.gif);
+	background-image:url(/static/images/plus.gif);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
-.right .trackbox .post .playbar .heart:hover {cursor:pointer;background-image:url(/static/images/unheart.gif);}
+.right .trackbox .post .playbar .heart:hover {cursor:pointer;background-image:url(/static/images/unplus.gif);}
 .right .trackbox .post .playbar h1 {
 	float:right;
 	font-family:uuc, Helvetica, Arial, Verdana, sans-serif;
@@ -725,11 +725,11 @@ body {
 	background-color:#02c8bc;
 	margin:0px;
 	float:right;
-	background-image:url(/static/images/np_heart.gif);
+	background-image:url(/static/images/np_plus.gif);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
-.right .trackbox .nowplaying .playbar .heart:hover {cursor:pointer;background-image:url(/static/images/np_unheart.gif);}
+.right .trackbox .nowplaying .playbar .heart:hover {cursor:pointer;background-image:url(/static/images/np_unplus.gif);}
 .right .trackbox .nowplaying .playbar h1 {
 	float:right;
 	font-family:uuc, Helvetica, Arial, Verdana, sans-serif;
@@ -846,11 +846,11 @@ body {
 	background-color:#fff;
 	margin:0px;
 	float:right;
-	background-image:url(/static/images/heart.gif);
+	background-image:url(/static/images/plus.gif);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
-.right .trackbox .featured .playbar .heart:hover {cursor:pointer;background-image:url(/static/images/unheart.gif);}
+.right .trackbox .featured .playbar .heart:hover {cursor:pointer;background-image:url(/static/images/unplus.gif);}
 .right .trackbox .featured .playbar h1 {
 	float:right;
 	font-family:uuc, Helvetica, Arial, Verdana, sans-serif;
