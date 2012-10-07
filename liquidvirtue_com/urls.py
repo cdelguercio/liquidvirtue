@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 	url(r'^my_library/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_my_library', name='trackbox_my_library'),
 	url(r'^pagebox/(?P<page_type>\w+)/(?P<page_number>\d+)/$', 'liquidvirtue.views.pagebox', name='pagebox'),
 	url(r'^trackinfo/$', 'liquidvirtue.views.trackinfo', name='trackinfo'),
+	url(r'^like/(?P<lv_video_id>\d+)/$', 'liquidvirtue.views.like', name='like'),
     #
     (r'^facebook/', include('django_facebook.urls')),
     

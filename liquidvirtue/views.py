@@ -17,6 +17,14 @@ def index(request):
 def index_with_id(request, np_video_id):
 	return render_to_response('index.html', {'np_video_id': request.session["np_video_id"]})
 
+def like(request, lv_video_id):
+	like_status = ''
+	if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
+		like_status = 'plus'
+	else:
+		like_status = 'heart'
+	return render_to_response('like.html', {'like_status': like_status})
+
 def pagebox(request, page_type, page_number):
 	#time_frame = request.POST["time_frame"]
 	#search = request.POST["search"]

@@ -104,8 +104,8 @@ function hit_like( _lv_video_id, _id )
 		http = new ActiveXObject( 'Microsoft.XMLHTTP' );
 	}
 	
-	var url = 'ajax/like_response.php';
-	var params = 'lv_video_id=' + escape(_lv_video_id);
+	var url = '/like/' + _lv_video_id + '/';
+	var params = '';
 	http.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
