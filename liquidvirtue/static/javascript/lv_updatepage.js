@@ -124,12 +124,12 @@ function hit_like( _lv_video_id, _plus_id, _num_likes_id )
 					document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) - 1;
 				}
 			} else {//this is a trackinfo call and we should update the trackbox song if it exists
-				var posts = document.getElementsByClassName('post');
+				var posts = document.getElementsByClassName('post_title');
 				for( var i = 0; i < posts.length; i++ ) {
-					alert( get_firstchild(posts[i]).innerHTML );
+					alert( posts[i].innerHTML );
 					alert( document.getElementById( 'title_big' ).innerHTML );
-					if( get_firstchild(posts[i]).innerHTML == document.getElementById( 'title_big' ).innerHTML ) {
-						var plus = get_nextsibling(get_firstchild(get_nextsibling(get_nextsibling(get_firstchild(posts[i])))));
+					if( posts[i].innerHTML == document.getElementById( 'title_big' ).innerHTML ) {
+						var plus = get_nextsibling(get_firstchild(get_nextsibling(get_nextsibling(posts[i]))));
 						plus.className = http.responseText;
 						num_likes = get_nextsibling(plus);
 						if( http.responseText == 'heart' ) {
