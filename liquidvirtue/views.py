@@ -132,6 +132,7 @@ def trackbox_popular(request, page_number):
 	now = datetime.now()
 	
 	upload_date_texts = []
+	class_names = []
 	
 	for video in videos:
 		year_delta = now.year - video.upload_date.year;
@@ -168,10 +169,14 @@ def trackbox_popular(request, page_number):
 		else:
 			upload_date_text = 'Posted now'
 		upload_date_texts.append(upload_date_text)
+		if Like.objects.filter(user=request.user.id).filter(video=video.id).exists():
+			class_names.append( 'heart' )
+		else:
+			class_names.append( 'plus' )
 		
-	videos_with_upload_date_texts = izip(videos, upload_date_texts)
+	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 
-	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts})
+	return render_to_response('trackbox.html', {'videos': videos_with_metadata})
 	
 def trackbox_my_library(request, page_number):
 	#lv_video_id = request.POST["lvVideoId"]
@@ -184,6 +189,7 @@ def trackbox_my_library(request, page_number):
 	now = datetime.now()
 	
 	upload_date_texts = []
+	class_names = []
 	
 	for video in videos:
 		year_delta = now.year - video.upload_date.year;
@@ -220,10 +226,14 @@ def trackbox_my_library(request, page_number):
 		else:
 			upload_date_text = 'Posted now'
 		upload_date_texts.append(upload_date_text)
+		if Like.objects.filter(user=request.user.id).filter(video=video.id).exists():
+			class_names.append( 'heart' )
+		else:
+			class_names.append( 'plus' )
 		
-	videos_with_upload_date_texts = izip(videos, upload_date_texts)
+	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 
-	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts})
+	return render_to_response('trackbox.html', {'videos': videos_with_metadata})
 
 def trackinfo(request):
 	title = request.POST["title"]
