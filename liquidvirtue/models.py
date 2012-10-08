@@ -7,7 +7,6 @@ class UserProfile(FacebookProfileModel):
     '''
     Inherit the properties from django facebook
     '''
-    likes = models.ManyToManyField(Video, through='Like')
     
 from django.db.models.signals import post_save
 from django.dispatch import receiver
