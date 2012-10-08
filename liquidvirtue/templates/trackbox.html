@@ -4,7 +4,7 @@
 	<p>{% if video.featured %}<i></i>{% endif %}<b>{{video.channel_name}}</b> ({{upload_date_text}})</p>
 	<div class="playbar">
 		<button class="play" onClick="change_video( '{{video.url|addslashes}}', '{{video.watch_page_url|addslashes}}', '{{video.youtube_video_id|addslashes}}', '{{video.title|addslashes}}', '{{video.channel_name|addslashes}}', '{{upload_date_text|addslashes}}', 'newest', {{video.id}}, this.parentNode.parentNode.className );this.parentNode.parentNode.className='nowplaying'" ></button>
-		<div id="plus_{{forloop.counter}}" class="{{class_name}}" onclick="hit_like({{video.id}}, this.id, this.nextSibling.id)"></div>
+		<div id="plus_{{forloop.counter}}" class="{{class_name}}" onclick="hit_like({{video.id}}, this.id, get_nextsibling(this).id)"></div>
 		<h1 id="num_likes_{{forloop.counter}}">{{video.num_likes}}</h1>
 	</div>
 </div>

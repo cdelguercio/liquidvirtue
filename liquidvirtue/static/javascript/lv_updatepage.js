@@ -262,6 +262,16 @@ function submitSearch( _e )
 	}
 }
 
+function get_nextsibling( n )
+{
+	x = n.nextSibling;
+	while ( x.nodeType != 1 )
+	{
+		x = x.nextSibling;
+	}
+	return x;
+}
+
 function init()
 {
 	updatePage( 1, 0 );
