@@ -116,9 +116,9 @@ def trackbox_newest(request, page_number):
 			upload_date_text = 'Posted now'
 		upload_date_texts.append(upload_date_text)
 		if Like.objects.filter(user=request.user.id).filter(video=video.id).exists():
-			class_names.append( 'plus' )
-		else:
 			class_names.append( 'heart' )
+		else:
+			class_names.append( 'plus' )
 
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 	
