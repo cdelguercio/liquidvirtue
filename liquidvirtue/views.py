@@ -127,7 +127,7 @@ def trackbox_newest(request, page_number):
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
 	page_number = int(page_number)
-	videos = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)]
+	videos = Video.objects.all().order_by('-num_likes').order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
