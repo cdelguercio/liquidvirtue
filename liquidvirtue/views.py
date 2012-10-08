@@ -22,7 +22,7 @@ def like(request, lv_video_id):
 	if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
 		v = Video.objects.get(pk=lv_video_id)
 		v.num_likes = v.num_likes - 1
-		if v.num_likes < 0
+		if v.num_likes < 0:
 			v.num_likes = 0
 		v.save()
 		l = Like.objects.filter(user=request.user.id).filter(video=lv_video_id)
