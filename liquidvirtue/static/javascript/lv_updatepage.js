@@ -126,6 +126,8 @@ function hit_like( _lv_video_id, _plus_id, _num_likes_id )
 			} else {//this is a trackinfo call and we should update the trackbox song if it exists
 				var posts = document.getElementsByClassName('post');
 				for( var i = 0; i < posts.length; i++ ) {
+					alert( get_firstchild(posts[i]).innerHTML );
+					alert( document.getElementById( 'title_big' ).innerHTML );
 					if( get_firstchild(posts[i]).innerHTML == document.getElementById( 'title_big' ).innerHTML ) {
 						var plus = get_nextsibling(get_firstchild(get_nextsibling(get_nextsibling(get_firstchild(posts[i])))));
 						plus.className = http.responseText;
