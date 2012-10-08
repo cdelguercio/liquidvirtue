@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from liquidvirtue.models import User
+from liquidvirtue.models import UserProfile
 from liquidvirtue.models import Like
 from liquidvirtue.models import Channel
 from liquidvirtue.models import Video
