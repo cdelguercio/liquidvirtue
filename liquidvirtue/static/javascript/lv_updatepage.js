@@ -117,10 +117,14 @@ function hit_like( _lv_video_id, _plus_id, _num_likes_id )
 		{
 			//set the className to the correct value
 			document.getElementById( _plus_id ).className = http.responseText;
-			if( http.responseText == 'heart' ) {
-				document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) + 1;
-			} else {
-				document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) - 1;
+			if( _num_likes_id != undefined ) {
+				if( http.responseText == 'heart' ) {
+					document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) + 1;
+				} else {
+					document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) - 1;
+				}
+			} else {//this is a trackinfo call and we should update the trackbox song if it exists
+				
 			}
 		}
 	}

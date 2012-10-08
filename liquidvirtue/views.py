@@ -257,5 +257,5 @@ def trackinfo(request):
 		alt_text = 'Remove this track from your playlist'
 	else:
 		class_name = 'plus'
-		alt_text = 'Add this track from your playlist'
+		alt_text = 'Add this track to your playlist'
 	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel': channel, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id})
