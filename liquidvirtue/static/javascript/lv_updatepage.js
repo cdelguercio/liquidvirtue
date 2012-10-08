@@ -91,7 +91,7 @@ function updatePage( _pageNumber, _pageType )
 	httpTrackbox.send( params );
 }
 
-function hit_like( _lv_video_id, _id )
+function hit_like( _lv_video_id, _plus_id, _num_likes_id )
 {
 	var http;
 	
@@ -116,7 +116,8 @@ function hit_like( _lv_video_id, _id )
 		if( http.readyState == 4 && http.status == 200 )
 		{
 			//set the className to the correct value
-			document.getElementById( _id ).className = http.responseText;
+			document.getElementById( _plus_id ).className = http.responseText;
+			document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ) ) + 1;
 		}
 	}
 
