@@ -7,8 +7,6 @@ class UserProfile(FacebookProfileModel):
     '''
     Inherit the properties from django facebook
     '''
-    user = models.OneToOneField(User)
-
     
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -50,7 +48,7 @@ class Video(models.Model):
 		return self.title
 
 class Like(models.Model):
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(UserProfile)
 	video = models.ForeignKey(Video)
 
 	def __unicode__(self):
