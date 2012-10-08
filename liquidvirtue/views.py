@@ -24,7 +24,7 @@ def like(request, lv_video_id):
 		l.delete()
 		like_status = 'plus'
 	else:
-		l = Like( video=Video.objects.get(pk=lv_video_id), user=User.objects.get(pk=request.user.id) )
+		l = Like( video=Video.objects.get(pk=lv_video_id), user=UserProfile.objects.get(pk=request.user.id) )
 		l.save()
 		like_status = 'heart'
 	return render_to_response('like.html', {'like_status': like_status})
