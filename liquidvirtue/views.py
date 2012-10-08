@@ -20,13 +20,22 @@ def index_with_id(request, np_video_id):
 def like(request, lv_video_id):
 	like_status = ''
 	if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
+		v = Video.objects.get(pk=lv_video_id)
+		v.num_likes = v.num_likes - 1
+		if v.num_likes < 0
+			v.num_likes = 0
+		v.save()
 		l = Like.objects.filter(user=request.user.id).filter(video=lv_video_id)
 		l.delete()
 		like_status = 'plus'
 	else:
-		l = Like( video=Video.objects.get(pk=lv_video_id), user=UserProfile.objects.get(pk=request.user.id) )
+		v = Video.objects.get(pk=lv_video_id)
+		v.num_likes = v.num_likes + 1
+		v.save()
+		l = Like( video=v, user=UserProfile.objects.get(pk=request.user.id) )
 		l.save()
 		like_status = 'heart'
+		
 	return render_to_response('like.html', {'like_status': like_status})
 
 def pagebox(request, page_type, page_number):
@@ -127,7 +136,7 @@ def trackbox_newest(request, page_number):
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
 	page_number = int(page_number)
-	videos = Video.objects.all().order_by('-num_likes').order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
+	videos = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
