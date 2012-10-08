@@ -78,6 +78,7 @@ def trackbox_newest(request, page_number):
 	now = datetime.now()
 	
 	upload_date_texts = []
+	class_names = []
 	
 	for video in videos:
 		year_delta = now.year - video.upload_date.year;
@@ -114,10 +115,14 @@ def trackbox_newest(request, page_number):
 		else:
 			upload_date_text = 'Posted now'
 		upload_date_texts.append(upload_date_text)
-		
-	videos_with_upload_date_texts = izip(videos, upload_date_texts)
+		if Like.objects.filter(user=request.user.id).filter(video=video.id).exists():
+			class_names.append( 'plus' )
+		else:
+			class_names.append( 'heart' )
+
+	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 	
-	return render_to_response('trackbox.html', {'videos': videos_with_upload_date_texts, 'lv_video_id':lv_video_id})
+	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'lv_video_id':lv_video_id})
 
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]

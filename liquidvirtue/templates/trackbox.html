@@ -1,10 +1,10 @@
-{% for video, upload_date_text in videos %}
+{% for video, upload_date_text, class_name in videos %}
 <div class="post">
 	<h1 onClick="change_video( '{{video.url|addslashes}}', '{{video.watch_page_url|addslashes}}', '{{video.youtube_video_id|addslashes}}', '{{video.title|addslashes}}', '{{video.channel_name|addslashes}}', '{{upload_date_text|addslashes}}', 'newest', {{video.id}}, this.parentNode.className );this.parentNode.className='nowplaying'">{{video.title}}</h1>
 	<p>{% if video.featured %}<i></i>{% endif %}<b>{{video.channel_name}}</b> ({{upload_date_text}})</p>
 	<div class="playbar">
 		<button class="play" onClick="change_video( '{{video.url|addslashes}}', '{{video.watch_page_url|addslashes}}', '{{video.youtube_video_id|addslashes}}', '{{video.title|addslashes}}', '{{video.channel_name|addslashes}}', '{{upload_date_text|addslashes}}', 'newest', {{video.id}}, this.parentNode.parentNode.className );this.parentNode.parentNode.className='nowplaying'" ></button>
-		<div id="post_{{forloop.counter}}" class="plus" onclick="hit_like({{video.id}},this.id)"></div>
+		<div id="post_{{forloop.counter}}" class="{{class_name}}" onclick="hit_like({{video.id}},this.id)"></div>
 		<h1>{{video.num_likes}}</h1>
 	</div>
 </div>
