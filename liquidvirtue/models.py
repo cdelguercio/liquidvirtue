@@ -7,6 +7,7 @@ class UserProfile(FacebookProfileModel):
     '''
     Inherit the properties from django facebook
     '''
+    likes = models.ManyToManyField(Video, through='Like')
     
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -32,7 +33,7 @@ class User(models.Model):
 		return self.facebook_username
 
 class Video(models.Model):
-	likes = models.ManyToManyField(User, through='Like')
+	likes = models.ManyToManyField(UserProfile, through='Like')
 	num_likes = models.IntegerField()
 	channel = models.ForeignKey(Channel)
 	channel_name = models.CharField(max_length=500)
