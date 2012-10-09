@@ -156,14 +156,22 @@ def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
 	time_frame = request.POST["time_frame"]
 	page_number = int(page_number)
-	num_videos = Video.objects.count()
+	now_time = time.time()
+	num_videos = 0
+	if time_frame == 'month':
+			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).count()
+		elif time_frame == 'week':
+			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).count()
+		elif time_frame == 'day':
+			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400)).count()
+		else:
+			num_videos = Video.objects.count()
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
 	if page_number > max_pages:
 		page_number = max_pages
 	if page_number <= 0:
 		page_number = 1
-	
-	now_time = time.time()
+
 	videos = []
 	if time_frame == 'month':
 		videos = Video.objects.all().filter(upload_time__gt=(now_time-86400 * 30)).order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
