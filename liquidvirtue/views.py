@@ -250,6 +250,7 @@ def trackbox_my_library(request, page_number):
 	return render_to_response('trackbox.html', {'videos': videos_with_metadata})
 
 def trackbox_search(request, page_number):
+	search = request.POST["search"]
 	page_number = int(page_number)
 	videos = Video.objects.filter(title__contains=search).order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 
