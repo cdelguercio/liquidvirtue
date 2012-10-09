@@ -73,7 +73,7 @@ function updatePage( _pageNumber, _pageType )
 	var url = '/' + _pageType + '/' + _pageNumber + '/';
 	var params =	'lvVideoId=' + escape(currentVideoId) +
 					'&currentSection=' + escape(currentSection) +
-					'&timeFrame=' + escape(timeFrame) +
+					'&time_frame=' + escape(timeFrame) +
 					'&search=' + escape(search);
 	httpTrackbox.open( 'POST', url, true );
 
