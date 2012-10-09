@@ -44,7 +44,7 @@ def pagebox(request, page_type, page_number):
 	num_videos = ''
 	if page_type == 'search':
 		num_videos = Video.objects.filter(title__contains=search).count()
-	else if page_type = 'my_library':
+	elif page_type == 'my_library':
 		num_videos = Video.objects.filter(like__user__id__exact=id).count()
 	else:
 		num_videos = Video.objects.count()
