@@ -43,6 +43,7 @@ def pagebox(request, page_type, page_number):
 	time_frame = request.POST["time_frame"]
 	search = request.POST["search"]
 	num_videos = 0
+	now_time = time.time()
 	if page_type == 'search':
 		num_videos = Video.objects.filter(title__icontains=search).count()
 	elif page_type == 'my_library':
