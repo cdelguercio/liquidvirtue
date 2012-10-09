@@ -43,7 +43,7 @@ def pagebox(request, page_type, page_number):
 	search = request.POST["search"]
 	num_videos = 0
 	if page_type == 'search':
-		num_videos = Video.objects.filter(title__contains=search).count()
+		num_videos = Video.objects.filter(title__icontains=search).count()
 	elif page_type == 'my_library':
 		num_videos = Video.objects.filter(like__user__id__exact=request.user.id).count()
 	else:
@@ -267,13 +267,13 @@ def trackbox_my_library(request, page_number):
 def trackbox_search(request, page_number):
 	search = request.POST["search"]
 	page_number = int(page_number)
-	num_videos = Video.objects.filter(title__contains=search).count()
+	num_videos = Video.objects.filter(title__icontains=search).count()
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
 	if page_number > max_pages:
 		page_number = max_pages
 	if page_number <= 0:
 		page_number = 1
-	videos = Video.objects.filter(title__contains=search).order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
+	videos = Video.objects.filter(title__icontains=search).order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 
 	now = datetime.now()
 	
