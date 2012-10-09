@@ -4,7 +4,7 @@ from liquidvirtue.models import Like
 from liquidvirtue.models import Channel
 from liquidvirtue.models import Video
 from datetime import datetime
-from time import time
+import time
 from django.template import RequestContext
 from itertools import izip
 from math import floor
