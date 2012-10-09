@@ -41,7 +41,8 @@ def like(request, lv_video_id):
 def pagebox(request, page_type, page_number):
 	#time_frame = request.POST["time_frame"]
 	search = request.POST["search"]
-	num_videos = ''
+	id = request.user.id
+	num_videos = 0
 	if page_type == 'search':
 		num_videos = Video.objects.filter(title__contains=search).count()
 	elif page_type == 'my_library':
