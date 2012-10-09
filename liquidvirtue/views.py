@@ -4,6 +4,7 @@ from liquidvirtue.models import Like
 from liquidvirtue.models import Channel
 from liquidvirtue.models import Video
 from datetime import datetime
+from time import time
 from django.template import RequestContext
 from itertools import izip
 from math import floor
@@ -39,13 +40,22 @@ def like(request, lv_video_id):
 	return render_to_response('like.html', {'like_status': like_status})
 
 def pagebox(request, page_type, page_number):
-	#time_frame = request.POST["time_frame"]
+	time_frame = request.POST["time_frame"]
 	search = request.POST["search"]
 	num_videos = 0
 	if page_type == 'search':
 		num_videos = Video.objects.filter(title__icontains=search).count()
 	elif page_type == 'my_library':
 		num_videos = Video.objects.filter(like__user__id__exact=request.user.id).count()
+	elif page_type == 'popular':
+		if time_frame == 'month':
+			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).count()
+		elif time_frame == 'week':
+			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).count()
+		elif time_frame == 'day':
+			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400)).count()
+		else:
+			num_videos = Video.objects.count()
 	else:
 		num_videos = Video.objects.count()
 
@@ -98,12 +108,12 @@ def trackbox_newest(request, page_number):
 	class_names = []
 	
 	for video in videos:
-		year_delta = now.year - video.upload_date.year;
-		month_delta = now.month - video.upload_date.month;
-		day_delta = now.day - video.upload_date.day;
-		hour_delta = now.hour - video.upload_date.hour;
-		minute_delta = now.minute - video.upload_date.minute;
-		second_delta = now.second - video.upload_date.second;
+		year_delta = now.year - video.upload_date.year
+		month_delta = now.month - video.upload_date.month
+		day_delta = now.day - video.upload_date.day
+		hour_delta = now.hour - video.upload_date.hour
+		minute_delta = now.minute - video.upload_date.minute
+		second_delta = now.second - video.upload_date.second
 	
 		if year_delta > 1:
 			upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
@@ -143,7 +153,7 @@ def trackbox_newest(request, page_number):
 
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
-	#time_frame = request.POST["time_frame"]
+	time_frame = request.POST["time_frame"]
 	page_number = int(page_number)
 	num_videos = Video.objects.count()
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
@@ -151,7 +161,17 @@ def trackbox_popular(request, page_number):
 		page_number = max_pages
 	if page_number <= 0:
 		page_number = 1
-	videos = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)]
+	
+	now_time = time.time()
+	videos = []
+	if time_frame == 'month':
+		videos = Video.objects.all().filter(upload_time__gt=(now_time-86400 * 30)).order_by('-upload_time', -num_likes')[(page_number-1)*17:(page_number*17)]
+	elif time_frame == 'week':
+		videos = Video.objects.all().filter(upload_time__gt=(now_time-86400 * 7)).order_by('-upload_time', -num_likes')[(page_number-1)*17:(page_number*17)]
+	elif time_frame == 'day':
+		videos = Video.objects.all().filter(upload_time__gt=(now_time-86400)).order_by('-upload_time', -num_likes')[(page_number-1)*17:(page_number*17)]
+	else:
+		videos = Video.objects.all().order_by('-upload_time', -num_likes')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
@@ -159,12 +179,12 @@ def trackbox_popular(request, page_number):
 	class_names = []
 	
 	for video in videos:
-		year_delta = now.year - video.upload_date.year;
-		month_delta = now.month - video.upload_date.month;
-		day_delta = now.day - video.upload_date.day;
-		hour_delta = now.hour - video.upload_date.hour;
-		minute_delta = now.minute - video.upload_date.minute;
-		second_delta = now.second - video.upload_date.second;
+		year_delta = now.year - video.upload_date.year
+		month_delta = now.month - video.upload_date.month
+		day_delta = now.day - video.upload_date.day
+		hour_delta = now.hour - video.upload_date.hour
+		minute_delta = now.minute - video.upload_date.minute
+		second_delta = now.second - video.upload_date.second
 	
 		if year_delta > 1:
 			upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
@@ -221,12 +241,12 @@ def trackbox_my_library(request, page_number):
 	class_names = []
 	
 	for video in videos:
-		year_delta = now.year - video.upload_date.year;
-		month_delta = now.month - video.upload_date.month;
-		day_delta = now.day - video.upload_date.day;
-		hour_delta = now.hour - video.upload_date.hour;
-		minute_delta = now.minute - video.upload_date.minute;
-		second_delta = now.second - video.upload_date.second;
+		year_delta = now.year - video.upload_date.year
+		month_delta = now.month - video.upload_date.month
+		day_delta = now.day - video.upload_date.day
+		hour_delta = now.hour - video.upload_date.hour
+		minute_delta = now.minute - video.upload_date.minute
+		second_delta = now.second - video.upload_date.second
 	
 		if year_delta > 1:
 			upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
@@ -281,12 +301,12 @@ def trackbox_search(request, page_number):
 	class_names = []
 	
 	for video in videos:
-		year_delta = now.year - video.upload_date.year;
-		month_delta = now.month - video.upload_date.month;
-		day_delta = now.day - video.upload_date.day;
-		hour_delta = now.hour - video.upload_date.hour;
-		minute_delta = now.minute - video.upload_date.minute;
-		second_delta = now.second - video.upload_date.second;
+		year_delta = now.year - video.upload_date.year
+		month_delta = now.month - video.upload_date.month
+		day_delta = now.day - video.upload_date.day
+		hour_delta = now.hour - video.upload_date.hour
+		minute_delta = now.minute - video.upload_date.minute
+		second_delta = now.second - video.upload_date.second
 	
 		if year_delta > 1:
 			upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
