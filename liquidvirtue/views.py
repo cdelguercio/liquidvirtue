@@ -40,8 +40,12 @@ def like(request, lv_video_id):
 
 def pagebox(request, page_type, page_number):
 	#time_frame = request.POST["time_frame"]
-	#search = request.POST["search"]
-	num_videos = Video.objects.count()
+	search = request.POST["search"]
+	num_videos = ''
+	if page_type == 'search':
+		num_videos = Video.objects.filter(title__contains=search).count()
+	else:
+		num_videos = Video.objects.count()
 
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
 	page_number = int( page_number )
@@ -135,6 +139,7 @@ def trackbox_newest(request, page_number):
 
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
+	#time_frame = request.POST["time_frame"]
 	page_number = int(page_number)
 	videos = Video.objects.all().order_by('-upload_time').order_by('-num_likes')[(page_number-1)*17:(page_number*17)]
 	
@@ -242,6 +247,58 @@ def trackbox_my_library(request, page_number):
 		
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 
+	return render_to_response('trackbox.html', {'videos': videos_with_metadata})
+
+def trackbox_search(request, page_number):
+	page_number = int(page_number)
+	videos = Video.objects.filter(title__contains=search).order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
+
+	now = datetime.now()
+	
+	upload_date_texts = []
+	class_names = []
+	
+	for video in videos:
+		year_delta = now.year - video.upload_date.year;
+		month_delta = now.month - video.upload_date.month;
+		day_delta = now.day - video.upload_date.day;
+		hour_delta = now.hour - video.upload_date.hour;
+		minute_delta = now.minute - video.upload_date.minute;
+		second_delta = now.second - video.upload_date.second;
+	
+		if year_delta > 1:
+			upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
+		elif year_delta == 1:
+			upload_date_text = 'Posted ' + str(year_delta) + ' year ago'
+		elif month_delta > 1:
+			upload_date_text = 'Posted ' + str(month_delta) + ' months ago'
+		elif month_delta == 1:
+			upload_date_text = 'Posted ' + str(month_delta) + ' month ago'
+		elif day_delta > 1:
+			upload_date_text = 'Posted ' + str(day_delta) + ' days ago'
+		elif day_delta == 1:
+			upload_date_text = 'Posted ' + str(day_delta) + ' day ago'
+		elif hour_delta > 1:
+			upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
+		elif hour_delta == 1:
+			upload_date_text = 'Posted ' + str(hour_delta) + ' hour ago'
+		elif minute_delta > 1:
+			upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
+		elif minute_delta == 1:
+			upload_date_text = 'Posted ' + str(minute_delta) + ' minute ago'
+		elif second_delta > 1:
+			upload_date_text = 'Posted ' + str(second_delta) + ' seconds ago'
+		elif second_delta == 1:
+			upload_date_text = 'Posted ' + str(second_delta) + ' second ago'
+		else:
+			upload_date_text = 'Posted now'
+		upload_date_texts.append(upload_date_text)
+		if Like.objects.filter(user=request.user.id).filter(video=video.id).exists():
+			class_names.append( 'heart' )
+		else:
+			class_names.append( 'plus' )
+		
+	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 	return render_to_response('trackbox.html', {'videos': videos_with_metadata})
 
 def trackinfo(request):
