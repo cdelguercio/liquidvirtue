@@ -143,6 +143,8 @@ def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
 	#time_frame = request.POST["time_frame"]
 	page_number = int(page_number)
+	num_videos = Video.objects.count()
+	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
 	if page_number > max_pages:
 		page_number = max_pages
 	if page_number <= 0:
@@ -202,6 +204,8 @@ def trackbox_my_library(request, page_number):
 	#lv_video_id = request.POST["lvVideoId"]
 	page_number = int(page_number)
 	id = request.user.id
+	num_videos = Video.objects.filter(like__user__id__exact=id).count()
+	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
 	if page_number > max_pages:
 		page_number = max_pages
 	if page_number <= 0:
