@@ -101,7 +101,7 @@ function playNext()
 	}
 
 	var url = '/get_next/';
-	var params = 'currentVideoId=' + escape(currentVideoId) + '&currentSection=' + escape(currentSection) + '&timeFrame=' + timeFrame + '&search=' + search;
+	var params = 'currentVideoId=' + escape(currentVideoId) + '&currentSection=' + escape(currentSection) + '&time_frame=' + timeFrame + '&search=' + search;
 	http.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
@@ -116,7 +116,8 @@ function playNext()
 			{
 				if( elements[i].id == "track_1" && currentSection == 'newest' && pageType == 'newest' )
 				{
-					elements[i].setAttribute( 'class', 'featured' );
+					elements[i].setAttribute( 'class', 'post' );
+					//elements[i].setAttribute( 'class', 'featured' );
 				}
 				else
 				{

@@ -175,7 +175,7 @@ function post_to_facebook( _id )
 	http.send( params );
 }
 
-function generate_trackinfo( _title, _channel, _upload_date_text, _watchPageUrl, _lv_video_id )
+function generate_trackinfo( _title, _channel, _upload_date_text, _watch_page_url, _lv_video_id )
 {
 	var http;
 	
@@ -189,8 +189,8 @@ function generate_trackinfo( _title, _channel, _upload_date_text, _watchPageUrl,
 	}
 	
 	
-	var url = '/trackinfo/';
-	var params =	'title=' + escape(_title) + '&channel=' + escape(_channel) + '&upload_date_text=' + escape(_upload_date_text) + '&watchPageUrl=' + escape(_watchPageUrl) + '&lv_video_id=' + escape(_lv_video_id);
+	var url = '/trackinfo/'; //TODO send the lv_video_id in the url, then get rid of all these params
+	var params =	'title=' + escape(_title) + '&channel=' + escape(_channel) + '&upload_date_text=' + escape(_upload_date_text) + '&watch_page_url=' + escape(_watch_page_url) + '&lv_video_id=' + escape(_lv_video_id);
 	http.open( 'POST', url, true );
 
 	//Send the proper header information along with the request

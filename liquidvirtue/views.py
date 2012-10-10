@@ -18,6 +18,26 @@ def index(request):
 def index_with_id(request, np_video_id):
 	return render_to_response('index.html', {'np_video_id': request.session["np_video_id"]})
 
+def get_next(request):
+	lv_video_id = request.POST["currentVideoId"]
+	page_type = request.POST["currentSection"]
+	time_frame = request.POST["time_frame"]
+	search = request.POST["search"]
+	
+	v = Video.objects.get(pk=lv_video_id)
+	
+	if page_type == 'popular':
+		if time_frame == 'month':
+			Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).order_by('-num_likes', '-upload_time').filter(upload_time__lt=v.upload_time)[0]
+		elif time_frame == 'week':
+		elif time_frame == 'day':
+		else: //all_time
+	elif page_type == 'my_library':
+	elif page_type == 'search':
+	else: //newest
+
+	return render_to_response('get_next.html', {'lv_video_id': lv_video_id, 'title': title, 'channel': channel, 'watch_page_url': watch_page_url, 'youtube_video_id': youtube_video_id, 'year': year, 'month': month, 'day': day, 'hour': hour, 'minute': minute, 'second': second})
+
 def like(request, lv_video_id):
 	like_status = ''
 	if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
@@ -55,7 +75,7 @@ def pagebox(request, page_type, page_number):
 			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).count()
 		elif time_frame == 'day':
 			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400)).count()
-		else:
+		else: //all_time
 			num_videos = Video.objects.count()
 	else:
 		num_videos = Video.objects.count()
@@ -357,6 +377,7 @@ def trackinfo(request):
 	channel = request.POST["channel"]
 	upload_date_text = request.POST["upload_date_text"]
 	lv_video_id = request.POST["lv_video_id"]
+	watch_page_url = request.POST["watch_page_url"]
 	likes = Like.objects.all().filter(user=request.user.id, video_id=lv_video_id)
 	class_name = ''
 	alt_text = ''
@@ -366,4 +387,4 @@ def trackinfo(request):
 	else:
 		class_name = 'plus'
 		alt_text = 'Add this track to your playlist'
-	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel': channel, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id})
+	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel': channel, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id, 'watch_page_url': watch_page_url})
