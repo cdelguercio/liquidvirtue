@@ -8,6 +8,7 @@ import time
 from django.template import RequestContext
 from itertools import izip
 from math import floor
+from django.db.models import Q
 
 def index(request):
 	if "np_video_id" in request.session:
