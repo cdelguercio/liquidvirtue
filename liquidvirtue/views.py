@@ -60,7 +60,7 @@ def get_next(request):
 		else: #ran out of videos, play the first one
 			next_video = Video.objects.order_by('-upload_time')[0]
 
-	lv_video_id = next_video.lv_video_id
+	lv_video_id = next_video.id
 	channel = next_video.channel_name
 	watch_page_url = next_video.watch_page_url
 	youtube_video_id = next_video.youtube_video_id
