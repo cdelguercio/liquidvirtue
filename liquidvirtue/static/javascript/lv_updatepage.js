@@ -11,7 +11,7 @@ function updatePage( _pageNumber, _pageType )
 		_pageType = 'newest';
 	}
 	pageType = _pageType;
-	document.getElementById( 'arrow' ).className = _pageType;
+	document.getElementById( 'arrow' ).className = _pageType + '_arrow';
 	if( _pageType == 'search' )
 	{
 		search = document.getElementById( 'searchbar' ).value;

@@ -339,8 +339,9 @@ body {
 	background-position:top left;
 	background-repeat:no-repeat;
 	background-color:#000;
+	visibility:visible;
 }
-.right .popular {
+.right .popular_arrow {
 	width:37px;
 	height:19px;
 	float:left;
@@ -349,8 +350,9 @@ body {
 	background-position:top left;
 	background-repeat:no-repeat;
 	background-color:#000;
+	visibility:visible;
 }
-.right .my_library {
+.right .my_library_arrow {
 	width:37px;
 	height:19px;
 	float:left;
@@ -359,6 +361,10 @@ body {
 	background-position:top left;
 	background-repeat:no-repeat;
 	background-color:#000;
+	visibility:visible;
+}
+.right .search_arrow {
+	visibility:hidden;
 }
 .right .pagebox {
 	width:695px;
