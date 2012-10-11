@@ -330,7 +330,7 @@ body {
 .right .navbox p a:visited {color:#ccc;text-decoration:none;}
 .right .navbox p a:hover {color:#fff;text-decoration:none;}
 
-.right .newest {
+.right .newest_arrow {
 	width:37px;
 	height:19px;
 	float:left;
