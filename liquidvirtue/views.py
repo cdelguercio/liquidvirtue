@@ -233,13 +233,13 @@ def trackbox_popular(request, page_number):
 
 	videos = []
 	if time_frame == 'month':
-		videos = Video.objects.all().filter(upload_time__gt=(now_time-86400 * 30)).order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
+		videos = Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
 	elif time_frame == 'week':
-		videos = Video.objects.all().filter(upload_time__gt=(now_time-86400 * 7)).order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
+		videos = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
 	elif time_frame == 'day':
-		videos = Video.objects.all().filter(upload_time__gt=(now_time-86400)).order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
+		videos = Video.objects.filter(upload_time__gt=(now_time-86400)).order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
 	else:
-		videos = Video.objects.all().order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
+		videos = Video.objects.order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
 	
 	now = datetime.now()
 	
