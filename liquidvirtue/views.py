@@ -24,17 +24,52 @@ def get_next(request):
 	time_frame = request.POST["time_frame"]
 	search = request.POST["search"]
 	
+	now_time = time.time()
+	
 	v = Video.objects.get(pk=lv_video_id)
+	next_video = ''
 	
 	if page_type == 'popular':
 		if time_frame == 'month':
-			Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).order_by('-num_likes', '-upload_time').filter(upload_time__lt=v.upload_time)[0]
+			if Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0].exists():
+				next_video = Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
 		elif time_frame == 'week':
+			if Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0].exists():
+				next_video = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
 		elif time_frame == 'day':
+			if Video.objects.filter(upload_time__gt=(now_time-86400)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0].exists():
+				next_video = Video.objects.filter(upload_time__gt=(now_time-86400)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
 		else: //all_time
+			if Video.objects.filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0].exists():
+				next_video = Video.objects.filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
+		if next_video == '': //ran out of videos, play the first one
+			next_video = Video.objects.order_by('-num_likes', '-upload_time')[0]
 	elif page_type == 'my_library':
+		if Video.objects.filter(like__user__id__exact=request.user.id).filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0].exists():
+			next_video = Video.objects.filter(like__user__id__exact=request.user.id).filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0]
+		else: //ran out of videos, play the first one
+			next_video = Video.objects.filter(like__user__id__exact=request.user.id).order_by('-upload_time')[0]
 	elif page_type == 'search':
+		if Video.objects.filter(title__icontains=search).filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0].exists():
+			next_video = Video.objects.filter(title__icontains=search).filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0]
+		else: //ran out of videos, play the first one
+			next_video = Video.objects.filter(title__icontains=search).order_by('-upload_time')[0]
 	else: //newest
+		if Video.objects.filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0].exists():
+			next_video = Video.objects.filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0]
+		else: //ran out of videos, play the first one
+			next_video = Video.objects.order_by('-upload_time')[0]
+
+	lv_video_id = next_video.lv_video_id
+	channel = next_video.channel_name
+	watch_page_url = next_video.watch_page_url
+	youtube_video_id = next_video.youtube_video_id
+	year = next_video.upload_date.year
+	month = next_video.upload_date.month
+	day = next_video.upload_date.day
+	hour = next_video.upload_date.hour
+	minute = next_video.upload_date.minute
+	second = next_video.upload_date.second
 
 	return render_to_response('get_next.html', {'lv_video_id': lv_video_id, 'title': title, 'channel': channel, 'watch_page_url': watch_page_url, 'youtube_video_id': youtube_video_id, 'year': year, 'month': month, 'day': day, 'hour': hour, 'minute': minute, 'second': second})
 
