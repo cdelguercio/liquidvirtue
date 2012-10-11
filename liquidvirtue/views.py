@@ -150,6 +150,7 @@ def pagebox(request, page_type, page_number):
 
 def trackbox_newest(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
+	page_type = 'newest'
 	page_number = int( page_number )
 	num_videos = Video.objects.count()
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
@@ -206,11 +207,12 @@ def trackbox_newest(request, page_number):
 
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 	
-	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'lv_video_id':lv_video_id})
+	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'lv_video_id': lv_video_id, 'page_type': page_type})
 
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
 	time_frame = request.POST["time_frame"]
+	page_type = 'popular'
 	page_number = int(page_number)
 	now_time = time.time()
 	num_videos = 0
@@ -285,10 +287,11 @@ def trackbox_popular(request, page_number):
 		
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 
-	return render_to_response('trackbox.html', {'videos': videos_with_metadata})
+	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
 	
 def trackbox_my_library(request, page_number):
 	#lv_video_id = request.POST["lvVideoId"]
+	page_type = 'my_library'
 	page_number = int(page_number)
 	num_videos = Video.objects.filter(like__user__id__exact=request.user.id).count()
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
@@ -347,10 +350,11 @@ def trackbox_my_library(request, page_number):
 		
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 
-	return render_to_response('trackbox.html', {'videos': videos_with_metadata})
+	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
 
 def trackbox_search(request, page_number):
 	search = request.POST["search"]
+	page_type = 'search'
 	page_number = int(page_number)
 	num_videos = Video.objects.filter(title__icontains=search).count()
 	max_pages = int( floor( (num_videos - 1) / 17 ) + 1 )
@@ -406,7 +410,7 @@ def trackbox_search(request, page_number):
 			class_names.append( 'plus' )
 		
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
-	return render_to_response('trackbox.html', {'videos': videos_with_metadata})
+	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
 
 def trackinfo(request):
 	title = request.POST["title"]
