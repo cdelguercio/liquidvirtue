@@ -7,6 +7,7 @@ class UserProfile(FacebookProfileModel):
     '''
     Inherit the properties from django facebook
     '''
+    user = models.ForeignKey(User)
     
 from django.db.models.signals import post_save
 from django.dispatch import receiver
