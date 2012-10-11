@@ -192,7 +192,7 @@ function playNext()
 				var posts = document.getElementsByClassName( 'post' );
 				for( var i in posts )
 				{
-					if( posts[i].childNodes[0].innerHTML == items[1] || posts[i].childNodes[0].innerHTML == htmlEncode(items[1]) )
+					if( get_firstchild(posts[i]).innerHTML == items[1] || get_firstchild(posts[i]).innerHTML == htmlEncode(items[1]) )
 					{
 						posts[i].className = 'nowplaying';
 						break;
