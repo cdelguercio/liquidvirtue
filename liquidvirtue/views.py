@@ -32,23 +32,23 @@ def get_next(request):
 	
 	if page_type == 'popular':
 		if time_frame == 'month':
-			if Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time').exists():
-				next_video = Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
+			if Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).filter(Q(upload_time__lt=v.upload_time, num_likes=v.num_likes) | Q(num_likes__lt=v.num_likes)).order_by('-num_likes', '-upload_time').exists():
+				next_video = Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).filter(Q(upload_time__lt=v.upload_time, num_likes=v.num_likes) | Q(num_likes__lt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
 			else: #ran out of videos, play the first one
 				next_video = Video.objects.filter(upload_time__gt=(now_time-86400 * 30)).order_by('-num_likes', '-upload_time')[0]
 		elif time_frame == 'week':
-			if Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time').exists():
-				next_video = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
+			if Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).filter(Q(upload_time__lt=v.upload_time, num_likes=v.num_likes) | Q(num_likes__lt=v.num_likes)).order_by('-num_likes', '-upload_time').exists():
+				next_video = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).filter(Q(upload_time__lt=v.upload_time, num_likes=v.num_likes) | Q(num_likes__lt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
 			else: #ran out of videos, play the first one
 				next_video = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).order_by('-num_likes', '-upload_time')[0]
 		elif time_frame == 'day':
-			if Video.objects.filter(upload_time__gt=(now_time-86400)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time').exists():
-				next_video = Video.objects.filter(upload_time__gt=(now_time-86400)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
+			if Video.objects.filter(upload_time__gt=(now_time-86400)).filter(Q(upload_time__lt=v.upload_time, num_likes=v.num_likes) | Q(num_likes__lt=v.num_likes)).order_by('-num_likes', '-upload_time').exists():
+				next_video = Video.objects.filter(upload_time__gt=(now_time-86400)).filter(Q(upload_time__lt=v.upload_time, num_likes=v.num_likes) | Q(num_likes__lt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
 			else: #ran out of videos, play the first one
 				next_video = Video.objects.filter(upload_time__gt=(now_time-86400)).order_by('-num_likes', '-upload_time')[0]
 		else: #all_time
-			if Video.objects.filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time').exists():
-				next_video = Video.objects.filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
+			if Video.objects.filter(Q(upload_time__lt=v.upload_time, num_likes=v.num_likes) | Q(num_likes__lt=v.num_likes)).order_by('-num_likes', '-upload_time').exists():
+				next_video = Video.objects.filter(Q(upload_time__lt=v.upload_time, num_likes=v.num_likes) | Q(num_likes__lt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
 			else: #ran out of videos, play the first one
 				next_video = Video.objects.order_by('-num_likes', '-upload_time')[0]
 	elif page_type == 'my_library':
