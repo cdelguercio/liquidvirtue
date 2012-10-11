@@ -39,25 +39,25 @@ def get_next(request):
 		elif time_frame == 'day':
 			if Video.objects.filter(upload_time__gt=(now_time-86400)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0].exists():
 				next_video = Video.objects.filter(upload_time__gt=(now_time-86400)).filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
-		else: //all_time
+		else: #all_time
 			if Video.objects.filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0].exists():
 				next_video = Video.objects.filter(Q(upload_time__lt=v.upload_time) | Q(num_likes__gt=v.num_likes)).order_by('-num_likes', '-upload_time')[0]
-		if next_video == '': //ran out of videos, play the first one
+		if next_video == '': #ran out of videos, play the first one
 			next_video = Video.objects.order_by('-num_likes', '-upload_time')[0]
 	elif page_type == 'my_library':
 		if Video.objects.filter(like__user__id__exact=request.user.id).filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0].exists():
 			next_video = Video.objects.filter(like__user__id__exact=request.user.id).filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0]
-		else: //ran out of videos, play the first one
+		else: #ran out of videos, play the first one
 			next_video = Video.objects.filter(like__user__id__exact=request.user.id).order_by('-upload_time')[0]
 	elif page_type == 'search':
 		if Video.objects.filter(title__icontains=search).filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0].exists():
 			next_video = Video.objects.filter(title__icontains=search).filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0]
-		else: //ran out of videos, play the first one
+		else: #ran out of videos, play the first one
 			next_video = Video.objects.filter(title__icontains=search).order_by('-upload_time')[0]
-	else: //newest
+	else: #newest
 		if Video.objects.filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0].exists():
 			next_video = Video.objects.filter(upload_time__lt=v.upload_time).order_by('-upload_time')[0]
-		else: //ran out of videos, play the first one
+		else: #ran out of videos, play the first one
 			next_video = Video.objects.order_by('-upload_time')[0]
 
 	lv_video_id = next_video.lv_video_id
@@ -110,7 +110,7 @@ def pagebox(request, page_type, page_number):
 			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400 * 7)).count()
 		elif time_frame == 'day':
 			num_videos = Video.objects.filter(upload_time__gt=(now_time-86400)).count()
-		else: //all_time
+		else: #all_time
 			num_videos = Video.objects.count()
 	else:
 		num_videos = Video.objects.count()
