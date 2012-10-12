@@ -17,7 +17,7 @@ def index(request):
 def index_with_id(request, lv_video_id):
 	v = ''
 	track_initializer = ''
-	if Video.objects.get(pk=lv_video_id).exists():
+	if Video.objects.get(pk=lv_video_id):
 		video = Video.objects.get(pk=lv_video_id)
 		
 		now = datetime.now()
