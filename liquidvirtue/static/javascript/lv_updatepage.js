@@ -177,7 +177,6 @@ function post_to_facebook( _id )
 
 function generate_trackinfo( _lv_video_id )
 {
-	alert( 'generate_trackinfo' );
 	var http;
 	
 	if( window.XMLHttpRequest )

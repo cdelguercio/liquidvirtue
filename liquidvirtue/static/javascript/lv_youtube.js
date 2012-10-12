@@ -72,7 +72,6 @@ function play_pause( e )
 
 function onPlayerReady( event )
 {
-	alert( 'player ready!' );
 	if( lv_autoplay_id != undefined && youtube_autoplay_id != undefined )
 	{
 		player.loadVideoById( youtube_autoplay_id, 0, 'large' );
