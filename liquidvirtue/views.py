@@ -75,17 +75,9 @@ def get_next(request):
 
 	lv_video_id = next_video.id
 	title = next_video.title
-	channel = next_video.channel_name
-	watch_page_url = next_video.watch_page_url
 	youtube_video_id = next_video.youtube_video_id
-	year = next_video.upload_date.year
-	month = next_video.upload_date.month
-	day = next_video.upload_date.day
-	hour = next_video.upload_date.hour
-	minute = next_video.upload_date.minute
-	second = next_video.upload_date.second
 
-	return render_to_response('get_next.html', {'lv_video_id': lv_video_id, 'title': title, 'channel': channel, 'watch_page_url': watch_page_url, 'youtube_video_id': youtube_video_id, 'year': year, 'month': month, 'day': day, 'hour': hour, 'minute': minute, 'second': second})
+	return render_to_response('get_next.html', {'lv_video_id': lv_video_id, 'title': title, 'youtube_video_id': youtube_video_id})
 
 def like(request, lv_video_id):
 	like_status = ''

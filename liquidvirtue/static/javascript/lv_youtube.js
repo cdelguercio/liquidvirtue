@@ -129,66 +129,9 @@ function playNext()
 			currentVideoId = items[0];
 			if( currentVideoId && (currentVideoId != "") )
 			{
-				player.loadVideoById( items[4], 0, 'large' );
+				player.loadVideoById( items[2], 0, 'large' );
 
-				uploadYear = items[5];
-				uploadMonth = items[6];
-				uploadDay = items[7];
-				uploadHour = items[8];
-				uploadMinute = items[9];
-				uploadSecond = items[10];
-
-				currentTime = new Date();
-				
-				yearDifference = currentTime.getFullYear() - uploadYear;
-				monthDifference = currentTime.getMonth() - uploadMonth;
-				dayDifference = currentTime.getDate() - uploadDay;
-				hourDifference = (currentTime.getHours() + 8) - uploadHour;
-				minuteDifference = currentTime.getMinutes() - uploadMinute;
-				secondDifference = currentTime.getSeconds() - uploadSecond;
-				
-				uploadDateText = "";
-				if( yearDifference > 1 ) {
-					uploadDateText = 'Posted ' + yearDifference + ' years ago';
-				}
-				else if( yearDifference == 1 ) {
-					uploadDateText = 'Posted ' + yearDifference + ' year ago';
-				}
-				else if( monthDifference > 1 ) {
-					uploadDateText = 'Posted ' + monthDifference + ' months ago';
-				}
-				else if( monthDifference == 1 ) {
-					uploadDateText = 'Posted ' + monthDifference + ' month ago';
-				}
-				else if( dayDifference > 1 ) {
-					uploadDateText = 'Posted ' + dayDifference + ' days ago';
-				}
-				else if( dayDifference == 1 ) {
-					uploadDateText = 'Posted ' + dayDifference + ' day ago';
-				}
-				else if( hourDifference > 1 ) {
-					uploadDateText = 'Posted ' + hourDifference + ' hours ago';
-				}
-				else if( hourDifference == 1 ) {
-					uploadDateText = 'Posted ' + hourDifference + ' hour ago';
-				}
-				else if( minuteDifference > 1 ) {
-					uploadDateText = 'Posted ' + minuteDifference + ' minutes ago';
-				}
-				else if( minuteDifference == 1 ) {
-					uploadDateText = 'Posted ' + minuteDifference + ' minute ago';
-				}
-				else if( secondDifference > 1 ) {
-					uploadDateText = 'Posted ' + secondDifference + ' seconds ago';
-				}
-				else if( secondDifference == 1 ) {
-					uploadDateText = 'Posted ' + secondDifference + ' second ago';
-				}
-				else {
-					uploadDateText = 'Posted now';
-				}
-
-				generate_trackinfo( items[1], items[2], uploadDateText, items[3], items[0] );
+				generate_trackinfo( items[0] );
 				
 				var posts = document.getElementsByClassName( 'post' );
 				for( var i in posts )
