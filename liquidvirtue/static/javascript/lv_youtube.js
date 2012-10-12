@@ -1,6 +1,6 @@
+var undefined;
 var player;
 var interval;
-var video_id = -1;
 
 var tag = document.createElement( 'script' );
 tag.src = 'http://www.youtube.com/player_api';
@@ -72,9 +72,9 @@ function play_pause( e )
 
 function onPlayerReady( event )
 {
-	if( video_id != -1 )
+	if( video_id != undefined )
 	{
-		//some ajax call that populates track box with id
+		generate_trackinfo( video_id );
 	}
 }
 

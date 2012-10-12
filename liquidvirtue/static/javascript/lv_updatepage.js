@@ -175,7 +175,7 @@ function post_to_facebook( _id )
 	http.send( params );
 }
 
-function generate_trackinfo( _title, _channel, _upload_date_text, _watch_page_url, _lv_video_id )
+function generate_trackinfo( _lv_video_id )
 {
 	var http;
 	
@@ -189,8 +189,8 @@ function generate_trackinfo( _title, _channel, _upload_date_text, _watch_page_ur
 	}
 	
 	
-	var url = '/trackinfo/'; //TODO send the lv_video_id in the url, then get rid of all these params
-	var params =	'title=' + escape(_title) + '&channel=' + escape(_channel) + '&upload_date_text=' + escape(_upload_date_text) + '&watch_page_url=' + escape(_watch_page_url) + '&lv_video_id=' + escape(_lv_video_id);
+	var url = '/trackinfo/' + _lv_video_id + '/'; //TODO send the lv_video_id in the url, then get rid of all these params
+	var params =	'';
 	http.open( 'POST', url, true );
 
 	//Send the proper header information along with the request
@@ -211,7 +211,7 @@ function generate_trackinfo( _title, _channel, _upload_date_text, _watch_page_ur
 	http.send( params );
 }
 
-function change_video( _url, _watchPageUrl, _videoId, _title, _channel, _uploadDateText, _section, _lv_video_id, _postType )
+function change_video( _videoId, _section, _lv_video_id, _postType )
 {
 	if( _postType == 'post' || _postType == 'featured' )
 	{
@@ -230,7 +230,7 @@ function change_video( _url, _watchPageUrl, _videoId, _title, _channel, _uploadD
 			}
 		}
 		player.loadVideoById( _videoId, 0, 'large' );
-		generate_trackinfo( _title, _channel, _uploadDateText, _watchPageUrl, _lv_video_id );
+		generate_trackinfo( _lv_video_id );
 	}
 }
 

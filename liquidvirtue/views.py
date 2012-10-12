@@ -18,47 +18,7 @@ def index_with_id(request, lv_video_id):
 	v = ''
 	track_initializer = ''
 	if Video.objects.get(pk=lv_video_id):
-		video = Video.objects.get(pk=lv_video_id)
-		
-		now = datetime.now()
-		
-		upload_date_text = ''
-		
-		year_delta = now.year - video.upload_date.year
-		month_delta = now.month - video.upload_date.month
-		day_delta = now.day - video.upload_date.day
-		hour_delta = now.hour - video.upload_date.hour
-		minute_delta = now.minute - video.upload_date.minute
-		second_delta = now.second - video.upload_date.second
-	
-		if year_delta > 1:
-			upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
-		elif year_delta == 1:
-			upload_date_text = 'Posted ' + str(year_delta) + ' year ago'
-		elif month_delta > 1:
-			upload_date_text = 'Posted ' + str(month_delta) + ' months ago'
-		elif month_delta == 1:
-			upload_date_text = 'Posted ' + str(month_delta) + ' month ago'
-		elif day_delta > 1:
-			upload_date_text = 'Posted ' + str(day_delta) + ' days ago'
-		elif day_delta == 1:
-			upload_date_text = 'Posted ' + str(day_delta) + ' day ago'
-		elif hour_delta > 1:
-			upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
-		elif hour_delta == 1:
-			upload_date_text = 'Posted ' + str(hour_delta) + ' hour ago'
-		elif minute_delta > 1:
-			upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
-		elif minute_delta == 1:
-			upload_date_text = 'Posted ' + str(minute_delta) + ' minute ago'
-		elif second_delta > 1:
-			upload_date_text = 'Posted ' + str(second_delta) + ' seconds ago'
-		elif second_delta == 1:
-			upload_date_text = 'Posted ' + str(second_delta) + ' second ago'
-		else:
-			upload_date_text = 'Posted now'
-		
-		track_initializer = ' onload="generate_trackinfo( \'' + video.title.replace("'", "\\'") + '\', \'' + video.channel_name + '\', \'' + upload_date_text + '\', \'' + video.watch_page_url + '\', ' + str(video.id) + ' )"'
+		track_initializer = '<script>var video_id = ' + lv_video_id + ';</script>'
 	else:
 		track_initializer = ''
 
@@ -464,12 +424,50 @@ def trackbox_search(request, page_number):
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
 
-def trackinfo(request):
-	title = request.POST["title"]
-	channel = request.POST["channel"]
-	upload_date_text = request.POST["upload_date_text"]
-	lv_video_id = request.POST["lv_video_id"]
-	watch_page_url = request.POST["watch_page_url"]
+def trackinfo(request, lv_video_id):
+	video = Video.objects.get(pk=lv_video_id)
+	title = video.title
+	channel_name = video.channel_name
+	watch_page_url = video.watch_page_url
+	
+	upload_date_text = ''
+	
+	now = datetime.now()
+	
+	year_delta = now.year - video.upload_date.year
+	month_delta = now.month - video.upload_date.month
+	day_delta = now.day - video.upload_date.day
+	hour_delta = now.hour - video.upload_date.hour
+	minute_delta = now.minute - video.upload_date.minute
+	second_delta = now.second - video.upload_date.second
+
+	if year_delta > 1:
+		upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
+	elif year_delta == 1:
+		upload_date_text = 'Posted ' + str(year_delta) + ' year ago'
+	elif month_delta > 1:
+		upload_date_text = 'Posted ' + str(month_delta) + ' months ago'
+	elif month_delta == 1:
+		upload_date_text = 'Posted ' + str(month_delta) + ' month ago'
+	elif day_delta > 1:
+		upload_date_text = 'Posted ' + str(day_delta) + ' days ago'
+	elif day_delta == 1:
+		upload_date_text = 'Posted ' + str(day_delta) + ' day ago'
+	elif hour_delta > 1:
+		upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
+	elif hour_delta == 1:
+		upload_date_text = 'Posted ' + str(hour_delta) + ' hour ago'
+	elif minute_delta > 1:
+		upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
+	elif minute_delta == 1:
+		upload_date_text = 'Posted ' + str(minute_delta) + ' minute ago'
+	elif second_delta > 1:
+		upload_date_text = 'Posted ' + str(second_delta) + ' seconds ago'
+	elif second_delta == 1:
+		upload_date_text = 'Posted ' + str(second_delta) + ' second ago'
+	else:
+		upload_date_text = 'Posted now'
+
 	likes = Like.objects.filter(user=request.user.id, video_id=lv_video_id)
 	class_name = ''
 	alt_text = ''
@@ -479,4 +477,4 @@ def trackinfo(request):
 	else:
 		class_name = 'plus'
 		alt_text = 'Add this track to your playlist'
-	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel': channel, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id, 'watch_page_url': watch_page_url})
+	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel_name': channel_name, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id, 'watch_page_url': watch_page_url})

@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 	url(r'^search/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_search', name='trackbox_search'),
 	url(r'^get_next/$', 'liquidvirtue.views.get_next', name='get_next'),
 	url(r'^pagebox/(?P<page_type>\w+)/(?P<page_number>\d+)/$', 'liquidvirtue.views.pagebox', name='pagebox'),
-	url(r'^trackinfo/$', 'liquidvirtue.views.trackinfo', name='trackinfo'),
+	url(r'^trackinfo/(?P<lv_video_id>\d+)/$', 'liquidvirtue.views.trackinfo', name='trackinfo'),
 	url(r'^like/(?P<lv_video_id>\d+)/$', 'liquidvirtue.views.like', name='like'),
     #
     (r'^facebook/', include('django_facebook.urls')),
