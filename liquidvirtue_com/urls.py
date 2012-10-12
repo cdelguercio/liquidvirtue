@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'liquidvirtue.views.index', name='index'),
-    #(r'^id/(\d+)/$', 'liquidvirtue.views.index_with_id', name='index_with_id'),
+    url(r'^id/(?P<lv_video_id>\d+)/$', 'liquidvirtue.views.index_with_id', name='index_with_id'),
 	url(r'^newest/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_newest', name='trackbox_newest'),
 	url(r'^popular/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_popular', name='trackbox_popular'),
 	url(r'^my_library/(?P<page_number>\d+)/$', 'liquidvirtue.views.trackbox_my_library', name='trackbox_my_library'),

@@ -11,13 +11,58 @@ from math import floor
 from django.db.models import Q
 
 def index(request):
-	if "np_video_id" in request.session:
-		return render_to_response('index.html', {'np_video_id': request.session["np_video_id"]})
-	else:
-		return render_to_response('index.html', None, context_instance=RequestContext(request))
+	track_initializer = ''
+	return render_to_response('index.html', {'track_initializer': track_initializer}, None, context_instance=RequestContext(request))
 		
-def index_with_id(request, np_video_id):
-	return render_to_response('index.html', {'np_video_id': request.session["np_video_id"]})
+def index_with_id(request, lv_video_id):
+	v = ''
+	track_initializer = ''
+	if Video.objects.get(pk=lv_video_id).exists():
+		video = Video.objects.get(pk=lv_video_id)
+		
+		now = datetime.now()
+		
+		upload_date_text = ''
+		
+		year_delta = now.year - video.upload_date.year
+		month_delta = now.month - video.upload_date.month
+		day_delta = now.day - video.upload_date.day
+		hour_delta = now.hour - video.upload_date.hour
+		minute_delta = now.minute - video.upload_date.minute
+		second_delta = now.second - video.upload_date.second
+	
+		if year_delta > 1:
+			upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
+		elif year_delta == 1:
+			upload_date_text = 'Posted ' + str(year_delta) + ' year ago'
+		elif month_delta > 1:
+			upload_date_text = 'Posted ' + str(month_delta) + ' months ago'
+		elif month_delta == 1:
+			upload_date_text = 'Posted ' + str(month_delta) + ' month ago'
+		elif day_delta > 1:
+			upload_date_text = 'Posted ' + str(day_delta) + ' days ago'
+		elif day_delta == 1:
+			upload_date_text = 'Posted ' + str(day_delta) + ' day ago'
+		elif hour_delta > 1:
+			upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
+		elif hour_delta == 1:
+			upload_date_text = 'Posted ' + str(hour_delta) + ' hour ago'
+		elif minute_delta > 1:
+			upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
+		elif minute_delta == 1:
+			upload_date_text = 'Posted ' + str(minute_delta) + ' minute ago'
+		elif second_delta > 1:
+			upload_date_text = 'Posted ' + str(second_delta) + ' seconds ago'
+		elif second_delta == 1:
+			upload_date_text = 'Posted ' + str(second_delta) + ' second ago'
+		else:
+			upload_date_text = 'Posted now'
+		
+		track_initializer = 'onload="generate_trackinfo( \'' + video.title.replace("'", "\\'") + '\', \'' video.channel_name + '\', \'' + upload_date_text + '\', \'' + video.watch_page_url + '\', ' + video.id + ' )"'
+	else:
+		track_initializer = ''
+
+	return render_to_response('index.html', {'track_initializer': track_initializer}, context_instance=RequestContext(request))
 
 def get_next(request):
 	lv_video_id = request.POST["currentVideoId"]
