@@ -58,7 +58,7 @@ def index_with_id(request, lv_video_id):
 		else:
 			upload_date_text = 'Posted now'
 		
-		track_initializer = 'onload="generate_trackinfo( \'' + video.title.replace("'", "\\'") + '\', \'' video.channel_name + '\', \'' + upload_date_text + '\', \'' + video.watch_page_url + '\', ' + video.id + ' )"'
+		track_initializer = 'onload="generate_trackinfo( \'' + video.title.replace("'", "\\'") + '\', \'' + video.channel_name + '\', \'' + upload_date_text + '\', \'' + video.watch_page_url + '\', ' + video.id + ' )"'
 	else:
 		track_initializer = ''
 
