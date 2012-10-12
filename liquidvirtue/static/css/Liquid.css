@@ -716,7 +716,7 @@ body {
 	background-color:#000;
 	margin:0px;
 	float:right;
-	background-image:url(/static/images/heart.gif);
+	background-image:url(/static/images/np_plus.gif);
 	background-position:top left;
 	background-repeat:no-repeat;
 	-webkit-transition:background-color 0.4s ease;
@@ -731,7 +731,7 @@ body {
 	background-color:#02c8bc;
 	margin:0px;
 	float:right;
-	background-image:url(/static/images/np_plus.gif);
+	background-image:url(/static/images/np_heart.gif);
 	background-position:top left;
 	background-repeat:no-repeat;
 }
