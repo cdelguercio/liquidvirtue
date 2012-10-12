@@ -1,4 +1,4 @@
 from django.contrib import admin
-from liquidvirtue.models import Video, Channel
+from liquidvirtue.models import Video
 
-admin.site.register(Video, Channel)
+admin.site.register(Video)
