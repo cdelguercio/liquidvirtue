@@ -212,9 +212,8 @@ function generate_trackinfo( _lv_video_id )
 	http.send( params );
 }
 
-function change_video( _videoId, _section, _lv_video_id, _postType )
+function change_video( _videoId, _section, _lv_video_id, _postType ) //TODO this is not semantically pure
 {
-	alert( 'change_video' );
 	if( _postType == 'post' || _postType == 'featured' )
 	{
 		currentSection = _section;
@@ -224,7 +223,8 @@ function change_video( _videoId, _section, _lv_video_id, _postType )
 		{
 			if( elements[i].id == "track_1" && currentSection == 'newest' && _section == 'newest' )
 			{
-				elements[i].setAttribute( 'class', 'featured' );
+				//elements[i].setAttribute( 'class', 'featured' );
+				elements[i].setAttribute( 'class', 'post' );
 			}
 			else
 			{

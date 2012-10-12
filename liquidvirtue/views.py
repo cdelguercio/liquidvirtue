@@ -18,7 +18,8 @@ def index_with_id(request, lv_video_id):
 	v = ''
 	track_initializer = ''
 	if Video.objects.get(pk=lv_video_id):
-		track_initializer = '<script>var video_id = ' + lv_video_id + ';</script>'
+		video = Video.objects.get(pk=lv_video_id)
+		track_initializer = '<script>lv_autoplay_id = ' + lv_video_id + '; youtube_autoplay_id = ' + video.youtube_video_id + ';</script>'
 	else:
 		track_initializer = ''
 

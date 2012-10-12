@@ -73,9 +73,10 @@ function play_pause( e )
 function onPlayerReady( event )
 {
 	alert( 'player ready!' );
-	if( video_id != undefined )
+	if( lv_autoplay_id != undefined && youtube_autoplay_id != undefined )
 	{
-		generate_trackinfo( video_id );
+		player.loadVideoById( youtube_autoplay_id, 0, 'large' );
+		generate_trackinfo( lv_autoplay_id );
 	}
 }
 
