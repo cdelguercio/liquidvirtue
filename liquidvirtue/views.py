@@ -12,7 +12,7 @@ from django.db.models import Q
 
 def index(request):
 	track_initializer = ''
-	return render_to_response('index.html', {'track_initializer': track_initializer}, None, context_instance=RequestContext(request))
+	return render_to_response('index.html', {'track_initializer': track_initializer}, context_instance=RequestContext(request))
 		
 def index_with_id(request, lv_video_id):
 	v = ''
