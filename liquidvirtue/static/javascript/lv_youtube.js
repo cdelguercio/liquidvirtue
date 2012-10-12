@@ -72,6 +72,7 @@ function play_pause( e )
 
 function onPlayerReady( event )
 {
+	alert( 'player ready!' );
 	if( video_id != undefined )
 	{
 		generate_trackinfo( video_id );

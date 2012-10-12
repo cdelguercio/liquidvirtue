@@ -177,6 +177,7 @@ function post_to_facebook( _id )
 
 function generate_trackinfo( _lv_video_id )
 {
+	alert( 'generate_trackinfo' );
 	var http;
 	
 	if( window.XMLHttpRequest )
@@ -213,6 +214,7 @@ function generate_trackinfo( _lv_video_id )
 
 function change_video( _videoId, _section, _lv_video_id, _postType )
 {
+	alert( 'change_video' );
 	if( _postType == 'post' || _postType == 'featured' )
 	{
 		currentSection = _section;
