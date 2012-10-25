@@ -551,10 +551,9 @@ body {
 	margin:18px 00px 0px 20px;
 	background-color:#fff;
 	color:#000;
-	font-size:18px;
+	font-size:21px;
 	font-family:league-gothic, Helvetica, Arial, Verdana, sans-serif;
 	overflow:visible;
-	letter-spacing:-0.1em;
 	-webkit-transition:color 0.4s ease;
 	-moz-transition:color 0.4s ease;
 	-o-transition:color 0.4s ease;
