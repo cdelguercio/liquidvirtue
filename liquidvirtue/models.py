@@ -53,4 +53,4 @@ class Like(models.Model):
 	video = models.ForeignKey(Video)
 
 	def __unicode__(self):
-		return self.user
+		return unicode(self.user)
