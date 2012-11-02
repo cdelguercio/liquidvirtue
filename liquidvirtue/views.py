@@ -9,6 +9,7 @@ from django.template import RequestContext
 from itertools import izip
 from math import floor
 from django.db.models import Q
+from django.utils import json
 
 def index(request):
 	track_initializer = ''
@@ -77,7 +78,11 @@ def get_next(request):
 	title = next_video.title
 	youtube_video_id = next_video.youtube_video_id
 
-	return render_to_response('get_next.html', {'lv_video_id': lv_video_id, 'title': title, 'youtube_video_id': youtube_video_id})
+	response_data['lv_video_id'] = lv_video_id
+	response_data['title'] = title
+	response_data['youtube_video_id'] = youtube_video_id
+	return HttpResponse(json.dumps(response_data), mimetype="application/json")
+	#return render_to_response('get_next.html', {'lv_video_id': lv_video_id, 'title': title, 'youtube_video_id': youtube_video_id})
 
 def like(request, lv_video_id):
 	like_status = ''
@@ -97,8 +102,10 @@ def like(request, lv_video_id):
 		l = Like( video=v, user=UserProfile.objects.get(pk=request.user.id) )
 		l.save()
 		like_status = 'heart'
-		
-	return render_to_response('like.html', {'like_status': like_status})
+	
+	response_data['like_status'] = like_status
+	return HttpResponse(json.dumps(response_data), mimetype="application/json")
+	#return render_to_response('like.html', {'like_status': like_status})
 
 def pagebox(request, page_type, page_number):
 	time_frame = request.POST["time_frame"]
@@ -151,7 +158,12 @@ def pagebox(request, page_type, page_number):
 				start_page = max_pages - 6
 				end_page = max_pages
 
-	return render_to_response('pagebox.html', {'page_type': page_type, 'page_number': page_number, 'start_page': start_page, 'end_page': end_page + 1}) #end_page + 1 because range is EXCLUSIVE of the stop value
+	response_data['page_type'] = page_type
+	response_data['page_number'] = page_number
+	response_data['start_page'] = start_page
+	response_data['end_page'] = end_page + 1
+	return HttpResponse(json.dumps(response_data), mimetype="application/json")
+	#return render_to_response('pagebox.html', {'page_type': page_type, 'page_number': page_number, 'start_page': start_page, 'end_page': end_page + 1}) #end_page + 1 because range is EXCLUSIVE of the stop value
 
 def trackbox_newest(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
@@ -211,8 +223,11 @@ def trackbox_newest(request, page_number):
 			class_names.append( 'plus' )
 
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
-	
-	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'lv_video_id': lv_video_id, 'page_type': page_type})
+
+	response_data['videos_with_metadata'] = videos_with_metadata
+	response_data['page_type'] = page_type
+	return HttpResponse(json.dumps(response_data), mimetype="application/json")
+	#return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'lv_video_id': lv_video_id, 'page_type': page_type})
 
 def trackbox_popular(request, page_number):
 	lv_video_id = request.POST["lvVideoId"]
@@ -292,7 +307,10 @@ def trackbox_popular(request, page_number):
 		
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 
-	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
+	response_data['videos_with_metadata'] = videos_with_metadata
+	response_data['page_type'] = page_type
+	return HttpResponse(json.dumps(response_data), mimetype="application/json")
+	#return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
 	
 def trackbox_my_library(request, page_number):
 	#lv_video_id = request.POST["lvVideoId"]
@@ -355,7 +373,10 @@ def trackbox_my_library(request, page_number):
 		
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
 
-	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
+	response_data['videos_with_metadata'] = videos_with_metadata
+	response_data['page_type'] = page_type
+	return HttpResponse(json.dumps(response_data), mimetype="application/json")
+	#return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
 
 def trackbox_search(request, page_number):
 	search = request.POST["search"]
@@ -415,7 +436,11 @@ def trackbox_search(request, page_number):
 			class_names.append( 'plus' )
 		
 	videos_with_metadata = izip(videos, upload_date_texts, class_names)
-	return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
+	
+	response_data['videos_with_metadata'] = videos_with_metadata
+	response_data['page_type'] = page_type
+	return HttpResponse(json.dumps(response_data), mimetype="application/json")
+	#return render_to_response('trackbox.html', {'videos': videos_with_metadata, 'page_type': page_type})
 
 def trackinfo(request, lv_video_id):
 	video = Video.objects.get(pk=lv_video_id)
@@ -470,4 +495,13 @@ def trackinfo(request, lv_video_id):
 	else:
 		class_name = 'plus'
 		alt_text = 'Add this track to your playlist'
-	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel_name': channel_name, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id, 'watch_page_url': watch_page_url})
+		
+	response_data['class_name'] = class_name
+	response_data['alt_text'] = alt_text
+	response_data['title'] = title
+	response_data['channel_name'] = channel_name
+	response_data['upload_date_text'] = upload_date_text
+	response_data['lv_video_id'] = lv_video_id
+	response_data['watch_page_url'] = watch_page_url
+	return HttpResponse(json.dumps(response_data), mimetype="application/json")
+	#return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel_name': channel_name, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id, 'watch_page_url': watch_page_url})
