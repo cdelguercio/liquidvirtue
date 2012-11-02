@@ -21,6 +21,7 @@ def create_profile(sender, instance, created, **kwargs):
 class Channel(models.Model):
 	channel_name = models.CharField(max_length=500)
 	newest_video_name = models.CharField(max_length=1000)
+	newest_youtube_video_id = models.CharField(max_length=32)
 
 	def __unicode__(self):
 		return self.channel_name
