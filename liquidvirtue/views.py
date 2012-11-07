@@ -84,7 +84,7 @@ def like(request, lv_video_id):
 	if request.user.is_authenticated:
 		try:
 			userprofile = UserProfile.objects.get(pk=request.user.id)
-		except DoesNotExist:
+		except UserProfile.DoesNotExist:
 			pass
 		if userprofile:
 			if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
