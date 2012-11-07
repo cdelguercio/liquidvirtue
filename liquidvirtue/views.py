@@ -81,7 +81,7 @@ def get_next(request):
 
 def like(request, lv_video_id):
 	like_status = 'plus'
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
 			v = Video.objects.get(pk=lv_video_id)
 			v.num_likes = v.num_likes - 1
