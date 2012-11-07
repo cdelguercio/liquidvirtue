@@ -83,7 +83,7 @@ def like(request, lv_video_id):
 	like_status = 'plus'
 	if request.user.is_authenticated:
 		try:
-			userprofile = UserProfile.objects.get(user=request.user)
+			userprofile = UserProfile.objects.get(pk=request.user.id)
 		except DoesNotExist:
 			pass
 		if userprofile:
