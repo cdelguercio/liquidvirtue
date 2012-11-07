@@ -430,16 +430,68 @@ def trackinfo(request, lv_video_id):
 	channel_name = video.channel_name
 	watch_page_url = video.watch_page_url
 	
+	upload_date_text = get_upload_date_text( video.upload_date )
+	
+	#upload_date_text = ''
+	
+	#now = datetime.now()
+	
+	#year_delta = now.year - video.upload_date.year
+	#month_delta = now.month - video.upload_date.month
+	#day_delta = now.day - video.upload_date.day
+	#hour_delta = now.hour - video.upload_date.hour
+	#minute_delta = now.minute - video.upload_date.minute
+	#second_delta = now.second - video.upload_date.second
+
+	#if year_delta > 1:
+	#	upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
+	#elif year_delta == 1:
+	#	upload_date_text = 'Posted ' + str(year_delta) + ' year ago'
+	#elif month_delta > 1:
+	#	upload_date_text = 'Posted ' + str(month_delta) + ' months ago'
+	#elif month_delta == 1:
+	#	upload_date_text = 'Posted ' + str(month_delta) + ' month ago'
+	#elif day_delta > 1:
+	#	upload_date_text = 'Posted ' + str(day_delta) + ' days ago'
+	#elif day_delta == 1:
+	#	upload_date_text = 'Posted ' + str(day_delta) + ' day ago'
+	#elif hour_delta > 1:
+	#	upload_date_text = 'Posted ' + str(hour_delta) + ' hours ago'
+	#elif hour_delta == 1:
+	#	upload_date_text = 'Posted ' + str(hour_delta) + ' hour ago'
+	#elif minute_delta > 1:
+	#	upload_date_text = 'Posted ' + str(minute_delta) + ' minutes ago'
+	#elif minute_delta == 1:
+	#	upload_date_text = 'Posted ' + str(minute_delta) + ' minute ago'
+	#elif second_delta > 1:
+	#	upload_date_text = 'Posted ' + str(second_delta) + ' seconds ago'
+	#elif second_delta == 1:
+	#	upload_date_text = 'Posted ' + str(second_delta) + ' second ago'
+	#else:
+	#	upload_date_text = 'Posted now'
+
+	likes = Like.objects.filter(user=request.user.id, video_id=lv_video_id)
+	class_name = ''
+	alt_text = ''
+	if likes:
+		class_name = 'heart'
+		alt_text = 'Remove this track from your playlist'
+	else:
+		class_name = 'plus'
+		alt_text = 'Add this track to your playlist'
+	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel_name': channel_name, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id, 'watch_page_url': watch_page_url})
+
+def get_upload_date_text(upload_date):
 	upload_date_text = ''
 	
 	now = datetime.now()
 	
-	year_delta = now.year - video.upload_date.year
-	month_delta = now.month - video.upload_date.month
-	day_delta = now.day - video.upload_date.day
-	hour_delta = now.hour - video.upload_date.hour
-	minute_delta = now.minute - video.upload_date.minute
-	second_delta = now.second - video.upload_date.second
+	year_delta = now.year - upload_date.year
+	month_delta = now.month - upload_date.month
+	day_delta = now.day - upload_date.day
+	hour_delta = now.hour + 8 - upload_date.hour
+	minute_delta = now.minute - upload_date.minute
+	second_delta = now.second - upload_date.second
 
 	if year_delta > 1:
 		upload_date_text = 'Posted ' + str(year_delta) + ' years ago'
@@ -468,13 +520,5 @@ def trackinfo(request, lv_video_id):
 	else:
 		upload_date_text = 'Posted now'
 
-	likes = Like.objects.filter(user=request.user.id, video_id=lv_video_id)
-	class_name = ''
-	alt_text = ''
-	if likes:
-		class_name = 'heart'
-		alt_text = 'Remove this track from your playlist'
-	else:
-		class_name = 'plus'
-		alt_text = 'Add this track to your playlist'
-	return render_to_response('trackinfo.html', {'class_name': class_name, 'alt_text': alt_text, 'title': title, 'channel_name': channel_name, 'upload_date_text': upload_date_text, 'lv_video_id': lv_video_id, 'watch_page_url': watch_page_url})
+	return upload_date_text
+	
