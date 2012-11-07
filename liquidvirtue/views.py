@@ -82,6 +82,7 @@ def get_next(request):
 def like(request, lv_video_id):
 	like_status = 'plus'
 	if request.user.is_authenticated:
+		userprofile = False
 		try:
 			userprofile = UserProfile.objects.get(pk=request.user.id)
 		except UserProfile.DoesNotExist:
