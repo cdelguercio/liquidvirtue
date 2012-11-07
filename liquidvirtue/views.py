@@ -82,22 +82,27 @@ def get_next(request):
 def like(request, lv_video_id):
 	like_status = 'plus'
 	if request.user.is_authenticated:
-		if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
-			v = Video.objects.get(pk=lv_video_id)
-			v.num_likes = v.num_likes - 1
-			if v.num_likes < 0:
-				v.num_likes = 0
-			v.save()
-			l = Like.objects.filter(user=request.user.id).filter(video=lv_video_id)
-			l.delete()
-			like_status = 'plus'
-		else:
-			v = Video.objects.get(pk=lv_video_id)
-			v.num_likes = v.num_likes + 1
-			v.save()
-			l = Like( video=v, user=UserProfile.objects.get(pk=request.user.id) )
-			l.save()
-			like_status = 'heart'
+		try:
+			userprofile = UserProfile.objects.get(user=request.user)
+		except DoesNotExist:
+			pass
+		if userprofile:
+			if Like.objects.filter(user=request.user.id).filter(video=lv_video_id).exists():
+				v = Video.objects.get(pk=lv_video_id)
+				v.num_likes = v.num_likes - 1
+				if v.num_likes < 0:
+					v.num_likes = 0
+				v.save()
+				l = Like.objects.filter(user=request.user.id).filter(video=lv_video_id)
+				l.delete()
+				like_status = 'plus'
+			else:
+				v = Video.objects.get(pk=lv_video_id)
+				v.num_likes = v.num_likes + 1
+				v.save()
+				l = Like( video=v, user=UserProfile.objects.get(pk=request.user.id) )
+				l.save()
+				like_status = 'heart'
 		
 	return render_to_response('like.html', {'like_status': like_status})
 
