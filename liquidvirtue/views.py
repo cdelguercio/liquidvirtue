@@ -80,7 +80,7 @@ def get_next(request):
 	return render_to_response('get_next.html', {'lv_video_id': lv_video_id, 'title': title, 'youtube_video_id': youtube_video_id})
 
 def like(request, lv_video_id):
-	like_status = 'plus'
+	like_status = ''
 	if request.user.is_authenticated:
 		userprofile = False
 		try:
