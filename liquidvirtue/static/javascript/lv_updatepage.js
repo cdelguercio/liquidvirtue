@@ -115,25 +115,27 @@ function hit_like( _lv_video_id, _plus_id, _num_likes_id )
 	{
 		if( http.readyState == 4 && http.status == 200 )
 		{
-			//set the className to the correct value
-			document.getElementById( _plus_id ).className = http.responseText;
-			if( _num_likes_id != undefined ) {
-				if( http.responseText == 'heart' ) {
-					document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) + 1;
-				} else {
-					document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) - 1;
-				}
-			} else {//this is a trackinfo call and we should update the trackbox song if it exists
-				var posts = document.getElementsByClassName('post_title');
-				for( var i = 0; i < posts.length; i++ ) {
-					if( posts[i].innerHTML == document.getElementById( 'title_big' ).innerHTML ) {
-						var plus = get_nextsibling(get_firstchild(get_nextsibling(get_nextsibling(posts[i]))));
-						plus.className = http.responseText;
-						num_likes = get_nextsibling(plus);
-						if( http.responseText == 'heart' ) {
-							num_likes.innerHTML = Number( num_likes.innerHTML ) + 1;
-						} else {
-							num_likes.innerHTML = Number( num_likes.innerHTML ) - 1;
+			if( http.responseText != '' ) {
+				//set the className to the correct value
+				document.getElementById( _plus_id ).className = http.responseText;
+				if( _num_likes_id != undefined ) {
+					if( http.responseText == 'heart' ) {
+						document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) + 1;
+					} else {
+						document.getElementById( _num_likes_id ).innerHTML = Number( document.getElementById( _num_likes_id ).innerHTML ) - 1;
+					}
+				} else {//this is a trackinfo call and we should update the trackbox song if it exists
+					var posts = document.getElementsByClassName('post_title');
+					for( var i = 0; i < posts.length; i++ ) {
+						if( posts[i].innerHTML == document.getElementById( 'title_big' ).innerHTML ) {
+							var plus = get_nextsibling(get_firstchild(get_nextsibling(get_nextsibling(posts[i]))));
+							plus.className = http.responseText;
+							num_likes = get_nextsibling(plus);
+							if( http.responseText == 'heart' ) {
+								num_likes.innerHTML = Number( num_likes.innerHTML ) + 1;
+							} else {
+								num_likes.innerHTML = Number( num_likes.innerHTML ) - 1;
+							}
 						}
 					}
 				}
