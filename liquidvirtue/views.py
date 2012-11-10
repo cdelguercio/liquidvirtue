@@ -9,6 +9,7 @@ from django.template import RequestContext
 from itertools import izip
 from math import floor
 from django.db.models import Q
+from django.utils import timezone
 
 def index(request):
 	track_initializer = ''
@@ -172,7 +173,7 @@ def trackbox_newest(request, page_number):
 		page_number = 1
 	videos = Video.objects.order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 	
-	now = datetime.now()
+	now = timezone.now()
 	
 	upload_date_texts = []
 	class_names = []
@@ -220,7 +221,7 @@ def trackbox_popular(request, page_number):
 	else:
 		videos = Video.objects.order_by('-num_likes', '-upload_time')[(page_number-1)*17:(page_number*17)]
 	
-	now = datetime.now()
+	now = timezone.now()
 	
 	upload_date_texts = []
 	class_names = []
@@ -251,7 +252,7 @@ def trackbox_my_library(request, page_number):
 	#l = Like.objects.filter(user=request.user.id)
 	#videos = l.video_set.order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 
-	now = datetime.now()
+	now = timezone.now()
 
 	upload_date_texts = []
 	class_names = []
@@ -280,7 +281,7 @@ def trackbox_search(request, page_number):
 		page_number = 1
 	videos = Video.objects.filter(title__icontains=search).order_by('-upload_time')[(page_number-1)*17:(page_number*17)]
 
-	now = datetime.now()
+	now = timezone.now()
 
 	upload_date_texts = []
 	class_names = []
@@ -302,7 +303,7 @@ def trackinfo(request, lv_video_id):
 	channel_name = video.channel_name
 	watch_page_url = video.watch_page_url
 
-	now = datetime.now()
+	now = timezone.now()
 
 	upload_date_text = get_upload_date_text( video.upload_date, now )
 
@@ -323,7 +324,7 @@ def get_upload_date_text(upload_date, now):
 	year_delta = now.year - upload_date.year
 	month_delta = now.month - upload_date.month
 	day_delta = now.day - upload_date.day
-	hour_delta = now.hour + 8 - upload_date.hour
+	hour_delta = now.hour - upload_date.hour
 	minute_delta = now.minute - upload_date.minute
 	second_delta = now.second - upload_date.second
 
